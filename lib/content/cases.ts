@@ -1,0 +1,112 @@
+/**
+ * Cases / opdrachtgevers — bron: eenwebsitevanons.nl (/klanten).
+ * `featured: true` = launch-case (volledig uitgewerkt, zie MERGE-PLAN.md §6B).
+ * Overige starten als overzichtskaart en krijgen later een detailpagina.
+ * TODO: echte teksten, resultaten, beelden en quotes aanleveren (gap #3/#4).
+ */
+export type CaseStudy = {
+  slug: string;
+  client: string;
+  sector: string;
+  summary: string;
+  featured: boolean;
+  url?: string;
+  problem?: string;
+  approach?: string;
+  result?: string;
+  quote?: { text: string; author: string };
+};
+
+export const cases: CaseStudy[] = [
+  {
+    slug: "brommer-winkel-voorthuizen",
+    client: "Brommer Winkel Voorthuizen",
+    sector: "Retail",
+    summary:
+      "Na 7 jaar toe aan een revisie: een snellere, frissere website die meegroeit met de winkel.",
+    featured: true,
+    problem:
+      "Een website die na jaren niet meer paste bij het bedrijf: traag, gedateerd en lastig te onderhouden.",
+    approach:
+      "In plaats van een volledige redesign kozen we voor een gerichte revisie — behouden wat werkt, vernieuwen wat moet.",
+    result:
+      "Een snellere, modernere site die beter converteert en eenvoudig te beheren is. — TODO: meetbare resultaten aanleveren.",
+  },
+  {
+    slug: "krachtcoach",
+    client: "Krachtcoach",
+    sector: "Coaching",
+    summary:
+      "Een persoonlijke huisstijl en website die de kracht van de coach uitstraalt.",
+    featured: true,
+    problem: "TODO: probleemstelling aanleveren.",
+    approach: "TODO: aanpak aanleveren.",
+    result: "TODO: resultaat aanleveren.",
+  },
+  {
+    slug: "stayfitnl",
+    client: "StayFitNL",
+    sector: "Fitness",
+    summary: "Een energieke website die leden inspireert om in beweging te komen.",
+    featured: true,
+    problem: "TODO: probleemstelling aanleveren.",
+    approach: "TODO: aanpak aanleveren.",
+    result: "TODO: resultaat aanleveren.",
+  },
+  {
+    slug: "approach-of-life",
+    client: "Approach of Life",
+    sector: "Coaching",
+    summary: "Een rustige, professionele uitstraling die vertrouwen wekt.",
+    featured: true,
+    problem: "TODO: probleemstelling aanleveren.",
+    approach: "TODO: aanpak aanleveren.",
+    result: "TODO: resultaat aanleveren.",
+  },
+  // Backlog-cases (overzichtskaart bij launch, detailpagina volgt — §6B)
+  {
+    slug: "kerk-vol-kracht",
+    client: "Kerk Vol Kracht",
+    sector: "Non-profit",
+    summary: "Een warme, uitnodigende website voor de gemeenschap.",
+    featured: false,
+  },
+  {
+    slug: "be-you-ti-ful",
+    client: "Be You Ti Ful",
+    sector: "Beauty",
+    summary: "Een stijlvolle website die de salon laat stralen.",
+    featured: false,
+  },
+  {
+    slug: "bnb-de-oude-bank",
+    client: "Bnb De Oude Bank",
+    sector: "Hospitality",
+    summary: "Een sfeervolle site die gasten direct laat boeken.",
+    featured: false,
+  },
+  {
+    slug: "relatiezorg-nu",
+    client: "RelatieZorg.nu",
+    sector: "Zorg",
+    summary: "Een toegankelijke website die drempels wegneemt.",
+    featured: false,
+  },
+  {
+    slug: "opinzicht",
+    client: "Opinzicht.nl",
+    sector: "Dienstverlening",
+    summary: "Een heldere website die overzicht brengt.",
+    featured: false,
+  },
+  {
+    slug: "freerun-academie",
+    client: "FreerunAcademie",
+    sector: "Sport",
+    summary: "Een dynamische website vol beweging en energie.",
+    featured: false,
+  },
+];
+
+export const getCase = (slug: string) => cases.find((c) => c.slug === slug);
+export const featuredCases = cases.filter((c) => c.featured);

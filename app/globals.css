@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+/* Class-based dark mode (next-themes voegt .dark toe op <html>). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #0b1020;
+  --muted: #f4f5f8;
+  --muted-foreground: #565d6d;
+  --card: #ffffff;
+  --card-foreground: #0b1020;
+  --border: #e7e9ef;
+  --input: #e7e9ef;
+  --ring: #4f46e5;
+  --brand: #4f46e5; /* indigo-600 — TODO: vervang door echte EWVO-huisstijl */
+  --brand-foreground: #ffffff;
+  --brand-muted: #eef0ff;
+  --accent: #0891b2; /* cyan-600 */
+  --accent-foreground: #ffffff;
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: #0a0c14;
+  --foreground: #e9ecf3;
+  --muted: #151a28;
+  --muted-foreground: #9aa2b4;
+  --card: #11151f;
+  --card-foreground: #e9ecf3;
+  --border: #232a3b;
+  --input: #232a3b;
+  --ring: #818cf8;
+  --brand: #6366f1; /* indigo-500 */
+  --brand-foreground: #ffffff;
+  --brand-muted: #181c2f;
+  --accent: #22d3ee; /* cyan-400 */
+  --accent-foreground: #042c33;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-muted: var(--brand-muted);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --radius-lg: var(--radius);
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--brand) 25%, transparent);
+  }
+}
+
+/* Subtiele radiale merkgloed voor hero-secties. */
+.brand-glow {
+  background-image: radial-gradient(
+      60% 60% at 50% 0%,
+      color-mix(in oklab, var(--brand) 16%, transparent),
+      transparent 70%
+    );
+}
