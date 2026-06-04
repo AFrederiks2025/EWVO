@@ -24,8 +24,22 @@ export type SiteSettings = {
   socials: { label: string; href: string }[];
 };
 
-/** Zet seed-paragrafen (string[]) om naar Portable Text, zodat de blogdetail
- *  altijd via dezelfde renderer kan (PortableText). */
+/**
+ * Voert een Sanity-query uit; valt bij élke fout (of als er geen project is
+ * gekoppeld) terug op de meegegeven seed-data. Zo kan een CMS-storing of
+ * netwerkprobleem de build/site nooit breken.
+ */
+async function safeFetch<T>(run: () => Promise<T>, fallback: T): Promise<T> {
+  if (!isSanityConfigured) return fallback;
+  try {
+    return await run();
+  } catch (err) {
+    console.error("[cms] Sanity-fetch mislukt, terugval op seed-content:", err);
+    return fallback;
+  }
+}
+
+/** Zet seed-paragrafen (string[]) om naar Portable Text. */
 function textToBlocks(paragraphs: string[]): PortableTextBlock[] {
   return paragraphs.map((text, i) => ({
     _type: "block",
@@ -40,85 +54,101 @@ const seedPostsByDate = [...seedPosts].sort((a, b) => (a.date < b.date ? 1 : -1)
 
 /* ---------------------------------- Diensten ---------------------------------- */
 
-export async function getServices(): Promise<Service[]> {
-  if (!isSanityConfigured) return seedServices;
-  const data = await client.fetch<Service[]>(q.servicesQuery);
-  return data?.length ? data : seedServices;
+export function getServices(): Promise<Service[]> {
+  return safeFetch(async () => {
+    const data = await client.fetch<Service[]>(q.servicesQuery);
+    return data?.length ? data : seedServices;
+  }, seedServices);
 }
 
-export async function getService(slug: string): Promise<Service | null> {
-  if (!isSanityConfigured)
-    return seedServices.find((s) => s.slug === slug) ?? null;
-  const data = await client.fetch<Service | null>(q.serviceQuery, { slug });
-  return data ?? null;
+export function getService(slug: string): Promise<Service | null> {
+  return safeFetch(
+    async () => {
+      const data = await client.fetch<Service | null>(q.serviceQuery, { slug });
+      return data ?? seedServices.find((s) => s.slug === slug) ?? null;
+    },
+    seedServices.find((s) => s.slug === slug) ?? null,
+  );
 }
 
-export async function getServiceSlugs(): Promise<string[]> {
-  if (!isSanityConfigured) return seedServices.map((s) => s.slug);
-  const data = await client.fetch<string[]>(q.serviceSlugsQuery);
-  return data?.length ? data : seedServices.map((s) => s.slug);
+export function getServiceSlugs(): Promise<string[]> {
+  return safeFetch(async () => {
+    const data = await client.fetch<string[]>(q.serviceSlugsQuery);
+    return data?.length ? data : seedServices.map((s) => s.slug);
+  }, seedServices.map((s) => s.slug));
 }
 
 /* ------------------------------------ Team ------------------------------------ */
 
-export async function getTeam(): Promise<TeamMemberItem[]> {
-  if (!isSanityConfigured) return seedTeam;
-  const data = await client.fetch<TeamMemberItem[]>(q.teamQuery);
-  return data?.length ? data : seedTeam;
+export function getTeam(): Promise<TeamMemberItem[]> {
+  return safeFetch(async () => {
+    const data = await client.fetch<TeamMemberItem[]>(q.teamQuery);
+    return data?.length ? data : seedTeam;
+  }, seedTeam);
 }
 
 /* ------------------------------------ Cases ----------------------------------- */
 
-export async function getCases(): Promise<CaseStudy[]> {
-  if (!isSanityConfigured) return seedCases;
-  const data = await client.fetch<CaseStudy[]>(q.casesQuery);
-  return data?.length ? data : seedCases;
+export function getCases(): Promise<CaseStudy[]> {
+  return safeFetch(async () => {
+    const data = await client.fetch<CaseStudy[]>(q.casesQuery);
+    return data?.length ? data : seedCases;
+  }, seedCases);
 }
 
 export async function getFeaturedCases(): Promise<CaseStudy[]> {
   return (await getCases()).filter((c) => c.featured);
 }
 
-export async function getCase(slug: string): Promise<CaseStudy | null> {
-  if (!isSanityConfigured) return seedCases.find((c) => c.slug === slug) ?? null;
-  const data = await client.fetch<CaseStudy | null>(q.caseQuery, { slug });
-  return data ?? null;
+export function getCase(slug: string): Promise<CaseStudy | null> {
+  return safeFetch(
+    async () => {
+      const data = await client.fetch<CaseStudy | null>(q.caseQuery, { slug });
+      return data ?? seedCases.find((c) => c.slug === slug) ?? null;
+    },
+    seedCases.find((c) => c.slug === slug) ?? null,
+  );
 }
 
-export async function getCaseSlugs(): Promise<string[]> {
-  if (!isSanityConfigured) return seedCases.map((c) => c.slug);
-  const data = await client.fetch<string[]>(q.caseSlugsQuery);
-  return data?.length ? data : seedCases.map((c) => c.slug);
+export function getCaseSlugs(): Promise<string[]> {
+  return safeFetch(async () => {
+    const data = await client.fetch<string[]>(q.caseSlugsQuery);
+    return data?.length ? data : seedCases.map((c) => c.slug);
+  }, seedCases.map((c) => c.slug));
 }
 
 /* ------------------------------------ Blog ------------------------------------ */
 
-export async function getPosts(): Promise<PostListItem[]> {
-  if (!isSanityConfigured) return seedPostsByDate;
-  const data = await client.fetch<PostListItem[]>(q.postsQuery);
-  return data?.length ? data : seedPostsByDate;
+export function getPosts(): Promise<PostListItem[]> {
+  return safeFetch(async () => {
+    const data = await client.fetch<PostListItem[]>(q.postsQuery);
+    return data?.length ? data : seedPostsByDate;
+  }, seedPostsByDate);
 }
 
-export async function getPost(slug: string): Promise<PostDetail | null> {
-  if (!isSanityConfigured) {
+export function getPost(slug: string): Promise<PostDetail | null> {
+  const seedFallback = (): PostDetail | null => {
     const p = seedPosts.find((post) => post.slug === slug);
     return p ? { ...p, body: textToBlocks(p.body) } : null;
-  }
-  const data = await client.fetch<
-    (Omit<Post, "body"> & { body?: PortableTextBlock[] }) | null
-  >(q.postQuery, { slug });
-  return data ? { ...data, body: data.body ?? [] } : null;
+  };
+  return safeFetch(async () => {
+    const data = await client.fetch<
+      (Omit<Post, "body"> & { body?: PortableTextBlock[] }) | null
+    >(q.postQuery, { slug });
+    return data ? { ...data, body: data.body ?? [] } : seedFallback();
+  }, seedFallback());
 }
 
-export async function getPostSlugs(): Promise<string[]> {
-  if (!isSanityConfigured) return seedPosts.map((p) => p.slug);
-  const data = await client.fetch<string[]>(q.postSlugsQuery);
-  return data?.length ? data : seedPosts.map((p) => p.slug);
+export function getPostSlugs(): Promise<string[]> {
+  return safeFetch(async () => {
+    const data = await client.fetch<string[]>(q.postSlugsQuery);
+    return data?.length ? data : seedPosts.map((p) => p.slug);
+  }, seedPosts.map((p) => p.slug));
 }
 
 /* -------------------------------- Site settings ------------------------------- */
 
-export async function getSiteSettings(): Promise<SiteSettings> {
+export function getSiteSettings(): Promise<SiteSettings> {
   const fallback: SiteSettings = {
     tagline: siteConfig.tagline,
     description: siteConfig.description,
@@ -128,18 +158,19 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     hours: siteConfig.contact.hours,
     socials: siteConfig.socials.map((s) => ({ label: s.label, href: s.href })),
   };
-  if (!isSanityConfigured) return fallback;
-  const data = await client.fetch<Partial<SiteSettings> | null>(
-    q.siteSettingsQuery,
-  );
-  if (!data) return fallback;
-  return {
-    tagline: data.tagline || fallback.tagline,
-    description: data.description || fallback.description,
-    phone: data.phone || fallback.phone,
-    email: data.email || fallback.email,
-    whatsapp: data.whatsapp || fallback.whatsapp,
-    hours: data.hours || fallback.hours,
-    socials: data.socials?.length ? data.socials : fallback.socials,
-  };
+  return safeFetch(async () => {
+    const data = await client.fetch<Partial<SiteSettings> | null>(
+      q.siteSettingsQuery,
+    );
+    if (!data) return fallback;
+    return {
+      tagline: data.tagline || fallback.tagline,
+      description: data.description || fallback.description,
+      phone: data.phone || fallback.phone,
+      email: data.email || fallback.email,
+      whatsapp: data.whatsapp || fallback.whatsapp,
+      hours: data.hours || fallback.hours,
+      socials: data.socials?.length ? data.socials : fallback.socials,
+    };
+  }, fallback);
 }

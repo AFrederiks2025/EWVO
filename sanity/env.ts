@@ -1,9 +1,17 @@
-export const apiVersion =
-  process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2024-10-01";
+// .trim() verwijdert verborgen witruimte/regeleindes (bv. een \r dat via
+// Windows-invoer in een Vercel-env-variabele kan sluipen) — anders weigert
+// de Sanity-client de projectId.
+export const apiVersion = (
+  process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2024-10-01"
+).trim();
 
-export const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
+export const dataset = (
+  process.env.NEXT_PUBLIC_SANITY_DATASET || "production"
+).trim();
 
-export const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "";
+export const projectId = (
+  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || ""
+).trim();
 
 /**
  * True zodra een echt Sanity-project is gekoppeld via env-variabelen.
