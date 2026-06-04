@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
+import { Resend } from "resend";
 
 /**
  * Contactformulier-handler.
- * TODO: koppel een echte e-mailservice (bijv. Resend) — zie MERGE-PLAN.md §8.
- * Nu logt de route het bericht en geeft succes terug.
+ * Verstuurt via Resend zodra RESEND_API_KEY + CONTACT_TO_EMAIL zijn gezet;
+ * anders logt de route het bericht (zodat het lokaal/zonder key blijft werken).
  */
 export async function POST(request: Request) {
   try {
@@ -16,6 +17,7 @@ export async function POST(request: Request) {
 
     const name = String(data.name ?? "").trim();
     const email = String(data.email ?? "").trim();
+    const phone = String(data.phone ?? "").trim();
     const message = String(data.message ?? "").trim();
 
     if (!name || !message || !email.includes("@")) {
@@ -25,8 +27,42 @@ export async function POST(request: Request) {
       );
     }
 
-    // TODO: vervang door verzending via Resend / e-mailservice.
-    console.log("Nieuw contactbericht:", { name, email, message });
+    const apiKey = process.env.RESEND_API_KEY;
+    const to = process.env.CONTACT_TO_EMAIL;
+    const from =
+      process.env.CONTACT_FROM_EMAIL || "EWVO Website <onboarding@resend.dev>";
+
+    if (apiKey && to) {
+      const resend = new Resend(apiKey);
+      const { error } = await resend.emails.send({
+        from,
+        to,
+        replyTo: email,
+        subject: `Nieuw contactbericht van ${name}`,
+        text: [
+          `Naam: ${name}`,
+          `E-mail: ${email}`,
+          `Telefoon: ${phone || "-"}`,
+          "",
+          message,
+        ].join("\n"),
+      });
+      if (error) {
+        console.error("Resend-fout:", error);
+        return NextResponse.json(
+          { ok: false, error: "Verzenden mislukt." },
+          { status: 502 },
+        );
+      }
+    } else {
+      // Nog geen e-mailservice gekoppeld: log het bericht.
+      console.log("Nieuw contactbericht (geen RESEND_API_KEY):", {
+        name,
+        email,
+        phone,
+        message,
+      });
+    }
 
     return NextResponse.json({ ok: true });
   } catch {
