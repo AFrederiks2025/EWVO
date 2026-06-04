@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { team } from "@/lib/content/team";
+import { getTeam } from "@/lib/cms";
 import { siteConfig } from "@/lib/site";
 import { Container, Section, SectionHeading } from "@/components/ui/container";
 import { PageHeader } from "@/components/sections/page-header";
@@ -31,7 +31,9 @@ const values = [
   },
 ];
 
-export default function OverOnsPage() {
+export default async function OverOnsPage() {
+  const team = await getTeam();
+
   return (
     <>
       <PageHeader

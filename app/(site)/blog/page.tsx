@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { postsByDate } from "@/lib/content/posts";
+import { getPosts } from "@/lib/cms";
 import { Container, Section } from "@/components/ui/container";
 import { PageHeader } from "@/components/sections/page-header";
 import { PostCard } from "@/components/sections/post-card";
@@ -12,7 +12,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const posts = await getPosts();
+
   return (
     <>
       <PageHeader
@@ -23,7 +25,7 @@ export default function BlogPage() {
       <Section>
         <Container>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {postsByDate.map((post) => (
+            {posts.map((post) => (
               <PostCard key={post.slug} post={post} />
             ))}
           </div>

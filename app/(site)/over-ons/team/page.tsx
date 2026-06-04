@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { team } from "@/lib/content/team";
+import { getTeam } from "@/lib/cms";
 import { Container, Section } from "@/components/ui/container";
 import { PageHeader } from "@/components/sections/page-header";
 import { TeamAvatar } from "@/components/sections/team-avatar";
@@ -12,7 +12,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/over-ons/team" },
 };
 
-export default function TeamPage() {
+export default async function TeamPage() {
+  const team = await getTeam();
+
   return (
     <>
       <PageHeader

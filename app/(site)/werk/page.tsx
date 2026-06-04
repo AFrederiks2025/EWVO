@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { cases } from "@/lib/content/cases";
+import { getCases } from "@/lib/cms";
 import { Container, Section } from "@/components/ui/container";
 import { PageHeader } from "@/components/sections/page-header";
 import { CaseCard } from "@/components/sections/case-card";
@@ -12,7 +12,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/werk" },
 };
 
-export default function WerkPage() {
+export default async function WerkPage() {
+  const cases = await getCases();
+
   return (
     <>
       <PageHeader

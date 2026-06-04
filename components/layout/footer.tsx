@@ -1,11 +1,17 @@
 import Link from "next/link";
 import { Mail, Phone } from "lucide-react";
 import { mainNav, siteConfig } from "@/lib/site";
-import { services } from "@/lib/content/services";
+import { getServices, getSiteSettings } from "@/lib/cms";
 import { Container } from "@/components/ui/container";
 
-export function Footer() {
+export async function Footer() {
   const year = new Date().getFullYear();
+  const [services, settings] = await Promise.all([
+    getServices(),
+    getSiteSettings(),
+  ]);
+  const phoneHref = `tel:${settings.phone.replace(/\s+/g, "")}`;
+  const emailHref = `mailto:${settings.email}`;
 
   return (
     <footer className="border-t border-border bg-muted/40">
@@ -19,7 +25,7 @@ export function Footer() {
               <span>{siteConfig.name}</span>
             </Link>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-              {siteConfig.description}
+              {settings.description}
             </p>
           </div>
 
@@ -57,23 +63,23 @@ export function Footer() {
             <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
               <li>
                 <a
-                  href={siteConfig.contact.phoneHref}
+                  href={phoneHref}
                   className="flex items-center gap-2 hover:text-foreground"
                 >
                   <Phone className="h-4 w-4" />
-                  {siteConfig.contact.phone}
+                  {settings.phone}
                 </a>
               </li>
               <li>
                 <a
-                  href={siteConfig.contact.emailHref}
+                  href={emailHref}
                   className="flex items-center gap-2 hover:text-foreground"
                 >
                   <Mail className="h-4 w-4" />
-                  {siteConfig.contact.email}
+                  {settings.email}
                 </a>
               </li>
-              <li>{siteConfig.contact.hours}</li>
+              <li>{settings.hours}</li>
             </ul>
           </div>
         </div>

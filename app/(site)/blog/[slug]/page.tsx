@@ -1,19 +1,22 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { formatDate, getPost, posts } from "@/lib/content/posts";
+import { PortableText } from "@portabletext/react";
+import { formatDate } from "@/lib/content/posts";
+import { getPost, getPostSlugs } from "@/lib/cms";
 import { Container, Section } from "@/components/ui/container";
 import { CtaBanner } from "@/components/sections/cta-banner";
 
 type Params = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return posts.map((post) => ({ slug: post.slug }));
+export async function generateStaticParams() {
+  const slugs = await getPostSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getPost(slug);
   if (!post) return {};
   return {
     title: post.title,
@@ -31,7 +34,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
 export default async function PostPage({ params }: Params) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getPost(slug);
   if (!post) notFound();
 
   const jsonLd = {
@@ -73,9 +76,7 @@ export default async function PostPage({ params }: Params) {
       <Section>
         <Container>
           <article className="mx-auto max-w-2xl space-y-6 text-lg leading-relaxed text-muted-foreground">
-            {post.body.map((paragraph, i) => (
-              <p key={i}>{paragraph}</p>
-            ))}
+            <PortableText value={post.body} />
           </article>
         </Container>
       </Section>

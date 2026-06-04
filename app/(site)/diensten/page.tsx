@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { services } from "@/lib/content/services";
+import { getServices } from "@/lib/cms";
 import { Container, Section, SectionHeading } from "@/components/ui/container";
 import { PageHeader } from "@/components/sections/page-header";
 import { ServiceCard } from "@/components/sections/service-card";
@@ -13,7 +13,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/diensten" },
 };
 
-export default function DienstenPage() {
+export default async function DienstenPage() {
+  const services = await getServices();
+
   return (
     <>
       <PageHeader

@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
-import { services } from "@/lib/content/services";
-import { featuredCases } from "@/lib/content/cases";
-import { postsByDate } from "@/lib/content/posts";
+import { getServices, getFeaturedCases, getPosts } from "@/lib/cms";
 import { primaryCta, siteConfig } from "@/lib/site";
 import { Container, Section, SectionHeading } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
@@ -28,7 +26,13 @@ const stats = [
   { value: "5", label: "dienstpijlers" },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [services, featuredCases, posts] = await Promise.all([
+    getServices(),
+    getFeaturedCases(),
+    getPosts(),
+  ]);
+
   return (
     <>
       <section className="brand-glow">
@@ -180,7 +184,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {postsByDate.slice(0, 3).map((post) => (
+            {posts.slice(0, 3).map((post) => (
               <PostCard key={post.slug} post={post} />
             ))}
           </div>

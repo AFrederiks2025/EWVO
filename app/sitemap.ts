@@ -1,12 +1,16 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site";
-import { services } from "@/lib/content/services";
-import { cases } from "@/lib/content/cases";
-import { posts } from "@/lib/content/posts";
+import { getCaseSlugs, getPosts, getServiceSlugs } from "@/lib/cms";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteConfig.url;
   const now = new Date();
+
+  const [serviceSlugs, caseSlugs, posts] = await Promise.all([
+    getServiceSlugs(),
+    getCaseSlugs(),
+    getPosts(),
+  ]);
 
   const staticRoutes = [
     "",
@@ -20,13 +24,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/algemene-voorwaarden",
   ].map((route) => ({ url: `${base}${route}`, lastModified: now }));
 
-  const serviceRoutes = services.map((s) => ({
-    url: `${base}/diensten/${s.slug}`,
+  const serviceRoutes = serviceSlugs.map((slug) => ({
+    url: `${base}/diensten/${slug}`,
     lastModified: now,
   }));
 
-  const caseRoutes = cases.map((c) => ({
-    url: `${base}/werk/${c.slug}`,
+  const caseRoutes = caseSlugs.map((slug) => ({
+    url: `${base}/werk/${slug}`,
     lastModified: now,
   }));
 

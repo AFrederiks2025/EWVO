@@ -2,19 +2,20 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
-import { cases, getCase } from "@/lib/content/cases";
+import { getCase, getCaseSlugs } from "@/lib/cms";
 import { Container, Section } from "@/components/ui/container";
 import { CtaBanner } from "@/components/sections/cta-banner";
 
 type Params = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return cases.map((study) => ({ slug: study.slug }));
+export async function generateStaticParams() {
+  const slugs = await getCaseSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
-  const study = getCase(slug);
+  const study = await getCase(slug);
   if (!study) return {};
   return {
     title: `${study.client} — Case`,
@@ -36,7 +37,7 @@ function DetailBlock({ title, text }: { title: string; text: string }) {
 
 export default async function CaseDetailPage({ params }: Params) {
   const { slug } = await params;
-  const study = getCase(slug);
+  const study = await getCase(slug);
   if (!study) notFound();
 
   return (

@@ -1,7 +1,12 @@
 import Link from "next/link";
 import { formatDate, type Post } from "@/lib/content/posts";
 
-export function PostCard({ post }: { post: Post }) {
+type PostCardData = Pick<
+  Post,
+  "slug" | "title" | "excerpt" | "date" | "author" | "category"
+>;
+
+export function PostCard({ post }: { post: PostCardData }) {
   return (
     <Link
       href={`/blog/${post.slug}`}

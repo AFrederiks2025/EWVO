@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
-import { getService, services } from "@/lib/content/services";
+import { getService, getServices, getServiceSlugs } from "@/lib/cms";
 import { Container, Section } from "@/components/ui/container";
 import { ServiceIcon } from "@/components/sections/icon";
 import { ButtonLink } from "@/components/ui/button";
@@ -10,13 +10,14 @@ import { CtaBanner } from "@/components/sections/cta-banner";
 
 type Params = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return services.map((service) => ({ slug: service.slug }));
+export async function generateStaticParams() {
+  const slugs = await getServiceSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
-  const service = getService(slug);
+  const service = await getService(slug);
   if (!service) return {};
   return {
     title: service.title,
@@ -27,10 +28,10 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
 export default async function ServiceDetailPage({ params }: Params) {
   const { slug } = await params;
-  const service = getService(slug);
+  const service = await getService(slug);
   if (!service) notFound();
 
-  const others = services.filter((s) => s.slug !== service.slug);
+  const others = (await getServices()).filter((s) => s.slug !== service.slug);
 
   return (
     <>
