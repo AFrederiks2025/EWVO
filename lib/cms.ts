@@ -50,13 +50,23 @@ function textToBlocks(paragraphs: string[]): PortableTextBlock[] {
   })) as unknown as PortableTextBlock[];
 }
 
+function cfetch<T>(
+  query: string,
+  params: Record<string, unknown> = {},
+): Promise<T> {
+  // Next.js ISR: ververs CMS-content elke 60s zonder rebuild.
+  return client.fetch(query, params, {
+    next: { revalidate: 60 },
+  }) as Promise<T>;
+}
+
 const seedPostsByDate = [...seedPosts].sort((a, b) => (a.date < b.date ? 1 : -1));
 
 /* ---------------------------------- Diensten ---------------------------------- */
 
 export function getServices(): Promise<Service[]> {
   return safeFetch(async () => {
-    const data = await client.fetch<Service[]>(q.servicesQuery);
+    const data = await cfetch<Service[]>(q.servicesQuery);
     return data?.length ? data : seedServices;
   }, seedServices);
 }
@@ -64,7 +74,7 @@ export function getServices(): Promise<Service[]> {
 export function getService(slug: string): Promise<Service | null> {
   return safeFetch(
     async () => {
-      const data = await client.fetch<Service | null>(q.serviceQuery, { slug });
+      const data = await cfetch<Service | null>(q.serviceQuery, { slug });
       return data ?? seedServices.find((s) => s.slug === slug) ?? null;
     },
     seedServices.find((s) => s.slug === slug) ?? null,
@@ -73,7 +83,7 @@ export function getService(slug: string): Promise<Service | null> {
 
 export function getServiceSlugs(): Promise<string[]> {
   return safeFetch(async () => {
-    const data = await client.fetch<string[]>(q.serviceSlugsQuery);
+    const data = await cfetch<string[]>(q.serviceSlugsQuery);
     return data?.length ? data : seedServices.map((s) => s.slug);
   }, seedServices.map((s) => s.slug));
 }
@@ -82,7 +92,7 @@ export function getServiceSlugs(): Promise<string[]> {
 
 export function getTeam(): Promise<TeamMemberItem[]> {
   return safeFetch(async () => {
-    const data = await client.fetch<TeamMemberItem[]>(q.teamQuery);
+    const data = await cfetch<TeamMemberItem[]>(q.teamQuery);
     return data?.length ? data : seedTeam;
   }, seedTeam);
 }
@@ -91,7 +101,7 @@ export function getTeam(): Promise<TeamMemberItem[]> {
 
 export function getCases(): Promise<CaseStudy[]> {
   return safeFetch(async () => {
-    const data = await client.fetch<CaseStudy[]>(q.casesQuery);
+    const data = await cfetch<CaseStudy[]>(q.casesQuery);
     return data?.length ? data : seedCases;
   }, seedCases);
 }
@@ -103,7 +113,7 @@ export async function getFeaturedCases(): Promise<CaseStudy[]> {
 export function getCase(slug: string): Promise<CaseStudy | null> {
   return safeFetch(
     async () => {
-      const data = await client.fetch<CaseStudy | null>(q.caseQuery, { slug });
+      const data = await cfetch<CaseStudy | null>(q.caseQuery, { slug });
       return data ?? seedCases.find((c) => c.slug === slug) ?? null;
     },
     seedCases.find((c) => c.slug === slug) ?? null,
@@ -112,7 +122,7 @@ export function getCase(slug: string): Promise<CaseStudy | null> {
 
 export function getCaseSlugs(): Promise<string[]> {
   return safeFetch(async () => {
-    const data = await client.fetch<string[]>(q.caseSlugsQuery);
+    const data = await cfetch<string[]>(q.caseSlugsQuery);
     return data?.length ? data : seedCases.map((c) => c.slug);
   }, seedCases.map((c) => c.slug));
 }
@@ -121,7 +131,7 @@ export function getCaseSlugs(): Promise<string[]> {
 
 export function getPosts(): Promise<PostListItem[]> {
   return safeFetch(async () => {
-    const data = await client.fetch<PostListItem[]>(q.postsQuery);
+    const data = await cfetch<PostListItem[]>(q.postsQuery);
     return data?.length ? data : seedPostsByDate;
   }, seedPostsByDate);
 }
@@ -132,7 +142,7 @@ export function getPost(slug: string): Promise<PostDetail | null> {
     return p ? { ...p, body: textToBlocks(p.body) } : null;
   };
   return safeFetch(async () => {
-    const data = await client.fetch<
+    const data = await cfetch<
       (Omit<Post, "body"> & { body?: PortableTextBlock[] }) | null
     >(q.postQuery, { slug });
     return data ? { ...data, body: data.body ?? [] } : seedFallback();
@@ -141,7 +151,7 @@ export function getPost(slug: string): Promise<PostDetail | null> {
 
 export function getPostSlugs(): Promise<string[]> {
   return safeFetch(async () => {
-    const data = await client.fetch<string[]>(q.postSlugsQuery);
+    const data = await cfetch<string[]>(q.postSlugsQuery);
     return data?.length ? data : seedPosts.map((p) => p.slug);
   }, seedPosts.map((p) => p.slug));
 }
@@ -159,7 +169,7 @@ export function getSiteSettings(): Promise<SiteSettings> {
     socials: siteConfig.socials.map((s) => ({ label: s.label, href: s.href })),
   };
   return safeFetch(async () => {
-    const data = await client.fetch<Partial<SiteSettings> | null>(
+    const data = await cfetch<Partial<SiteSettings> | null>(
       q.siteSettingsQuery,
     );
     if (!data) return fallback;
