@@ -73,6 +73,17 @@ export default async function CaseDetailPage({ params }: Params) {
         </Container>
       </section>
 
+      {study.image ? (
+        <Container className="pt-10 sm:pt-12">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={study.image}
+            alt={`Website van ${study.client}`}
+            className="w-full rounded-2xl border border-border object-cover object-top shadow-sm"
+          />
+        </Container>
+      ) : null}
+
       <Section>
         <Container>
           {study.featured ? (

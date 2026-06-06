@@ -17,13 +17,13 @@ export const teamQuery = `*[_type == "teamMember"] | order(order asc){
 }`;
 
 export const casesQuery = `*[_type == "caseStudy"] | order(order asc){
-  "slug": slug.current, client, sector, summary, featured, url, problem, approach, result, quote, image
+  "slug": slug.current, client, sector, summary, featured, url, problem, approach, result, quote, "image": image.asset->url
 }`;
 
 export const caseSlugsQuery = `*[_type == "caseStudy" && defined(slug.current)].slug.current`;
 
 export const caseQuery = `*[_type == "caseStudy" && slug.current == $slug][0]{
-  "slug": slug.current, client, sector, summary, featured, url, problem, approach, result, quote, image
+  "slug": slug.current, client, sector, summary, featured, url, problem, approach, result, quote, "image": image.asset->url
 }`;
 
 export const postsQuery = `*[_type == "post"] | order(date desc){

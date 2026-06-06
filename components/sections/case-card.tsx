@@ -15,13 +15,28 @@ export function CaseCard({
       href={`/werk/${study.slug}`}
       className="group overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-brand/50"
     >
-      <div
-        className={cn(
-          "flex aspect-[16/10] items-end bg-linear-to-br p-5",
-          brandGradients[index % brandGradients.length],
+      <div className="relative aspect-[16/10]">
+        {study.image ? (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={study.image}
+              alt={`Website van ${study.client}`}
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-black/45 via-black/5 to-transparent" />
+          </>
+        ) : (
+          // Geen screenshot → merk-gradiënt (blijft binnen de huisstijl, uniform)
+          <div
+            className={cn(
+              "absolute inset-0 bg-linear-to-br",
+              brandGradients[index % brandGradients.length],
+            )}
+          />
         )}
-      >
-        <span className="rounded-full bg-black/25 px-3 py-1 text-xs font-medium text-white backdrop-blur">
+        <span className="absolute bottom-3 left-3 rounded-full bg-black/30 px-3 py-1 text-xs font-medium text-white backdrop-blur">
           {study.sector}
         </span>
       </div>
