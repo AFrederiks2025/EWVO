@@ -11,21 +11,21 @@ export function CtaBanner({
 }) {
   return (
     <Container className="pb-20">
-      <div className="relative overflow-hidden rounded-3xl bg-brand px-6 py-14 text-center sm:px-12">
-        <h2 className="text-3xl font-semibold tracking-tight text-brand-foreground sm:text-4xl">
+      <div className="relative overflow-hidden rounded-3xl bg-accent px-6 py-14 text-center sm:px-12">
+        <h2 className="text-3xl font-semibold tracking-tight text-accent-foreground sm:text-4xl">
           {title}
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-brand-foreground/80">
+        <p className="mx-auto mt-4 max-w-xl text-accent-foreground/80">
           {description}
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <ButtonLink href={primaryCta.href} variant="secondary">
+          <ButtonLink href={primaryCta.href} variant="primary">
             {primaryCta.label}
           </ButtonLink>
           <ButtonLink
             href={siteConfig.contact.phoneHref}
             variant="outline"
-            className="border-brand-foreground/30 text-brand-foreground hover:bg-brand-foreground/10 hover:text-brand-foreground"
+            className="border-accent-foreground/30 text-accent-foreground hover:bg-accent-foreground/10 hover:text-accent-foreground"
           >
             Bel {siteConfig.contact.phone}
           </ButtonLink>

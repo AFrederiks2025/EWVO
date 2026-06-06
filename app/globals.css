@@ -3,39 +3,45 @@
 /* Class-based dark mode (next-themes voegt .dark toe op <html>). */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*
+ * EWVO-huisstijl:
+ * - --brand  = accent #ff6600 (knoppen, links, lijnen, focus, labels, details)
+ * - --accent = huisstijlkleur #91b3bf (hero-gloed, secties, placeholders, logo)
+ * De neutrale tinten zijn licht naar blauwgrijs (#91b3bf-familie) getrokken.
+ */
 :root {
   --background: #ffffff;
-  --foreground: #0b1020;
-  --muted: #f4f5f8;
-  --muted-foreground: #565d6d;
+  --foreground: #10242c;
+  --muted: #eef3f5;
+  --muted-foreground: #51616a;
   --card: #ffffff;
-  --card-foreground: #0b1020;
-  --border: #e7e9ef;
-  --input: #e7e9ef;
-  --ring: #4f46e5;
-  --brand: #4f46e5; /* indigo-600 — TODO: vervang door echte EWVO-huisstijl */
+  --card-foreground: #10242c;
+  --border: #dce6ea;
+  --input: #dce6ea;
+  --ring: #ff6600;
+  --brand: #ff6600; /* accent — knoppen, lijnen, details */
   --brand-foreground: #ffffff;
-  --brand-muted: #eef0ff;
-  --accent: #0891b2; /* cyan-600 */
-  --accent-foreground: #ffffff;
+  --brand-muted: #fff0e6; /* lichte oranje tint — badges/icoonvlakken */
+  --accent: #91b3bf; /* huisstijlkleur */
+  --accent-foreground: #0f2730;
   --radius: 0.75rem;
 }
 
 .dark {
-  --background: #0a0c14;
-  --foreground: #e9ecf3;
-  --muted: #151a28;
-  --muted-foreground: #9aa2b4;
-  --card: #11151f;
-  --card-foreground: #e9ecf3;
-  --border: #232a3b;
-  --input: #232a3b;
-  --ring: #818cf8;
-  --brand: #6366f1; /* indigo-500 */
-  --brand-foreground: #ffffff;
-  --brand-muted: #181c2f;
-  --accent: #22d3ee; /* cyan-400 */
-  --accent-foreground: #042c33;
+  --background: #0b1418;
+  --foreground: #e8eff1;
+  --muted: #14222a;
+  --muted-foreground: #93a6ad;
+  --card: #0f1b21;
+  --card-foreground: #e8eff1;
+  --border: #243640;
+  --input: #243640;
+  --ring: #ff7a26;
+  --brand: #ff7a26; /* iets feller oranje op donkere achtergrond */
+  --brand-foreground: #1a0d00;
+  --brand-muted: #2a1810;
+  --accent: #91b3bf;
+  --accent-foreground: #0f2730;
 }
 
 @theme inline {
@@ -75,15 +81,15 @@
     text-rendering: optimizeLegibility;
   }
   ::selection {
-    background: color-mix(in oklab, var(--brand) 25%, transparent);
+    background: color-mix(in oklab, var(--accent) 35%, transparent);
   }
 }
 
-/* Subtiele radiale merkgloed voor hero-secties. */
+/* Subtiele radiale huisstijl-gloed voor hero-secties (blauwgrijs #91b3bf). */
 .brand-glow {
   background-image: radial-gradient(
       60% 60% at 50% 0%,
-      color-mix(in oklab, var(--brand) 16%, transparent),
+      color-mix(in oklab, var(--accent) 24%, transparent),
       transparent 70%
     );
 }

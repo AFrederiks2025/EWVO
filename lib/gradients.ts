@@ -1,12 +1,12 @@
 /**
- * Merk-gradiënten voor decoratieve placeholders (case-beelden, team-avatars).
- * Bewust binnen de indigo → cyaan merkfamilie gehouden voor één huisstijl.
+ * Huisstijl-gradiënten voor decoratieve placeholders (case-beelden, team-avatars).
+ * Bewust binnen de blauwgrijze #91b3bf-merkfamilie gehouden voor één huisstijl.
  */
 export const brandGradients = [
-  "from-indigo-600 to-violet-600",
-  "from-blue-600 to-indigo-600",
-  "from-cyan-600 to-blue-600",
-  "from-indigo-500 to-cyan-600",
-  "from-violet-600 to-indigo-700",
-  "from-sky-600 to-indigo-600",
+  "from-[#a9c5cf] to-[#7099a8]",
+  "from-[#9cbcc8] to-[#6a92a2]",
+  "from-[#b4ccd3] to-[#88aebb]",
+  "from-[#8fb2bf] to-[#5f8a99]",
+  "from-[#a3c0cb] to-[#76949f]",
+  "from-[#93b3bf] to-[#6b94a3]",
 ];

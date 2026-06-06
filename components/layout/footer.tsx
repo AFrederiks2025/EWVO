@@ -3,6 +3,7 @@ import { Mail, Phone } from "lucide-react";
 import { mainNav, siteConfig } from "@/lib/site";
 import { getServices, getSiteSettings } from "@/lib/cms";
 import { Container } from "@/components/ui/container";
+import { Logo } from "@/components/layout/logo";
 
 export async function Footer() {
   const year = new Date().getFullYear();
@@ -19,9 +20,7 @@ export async function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link href="/" className="flex items-center gap-2 text-lg font-semibold">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-brand text-sm font-bold text-brand-foreground">
-                E
-              </span>
+              <Logo className="h-8 w-8 rounded-lg" />
               <span>{siteConfig.name}</span>
             </Link>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">

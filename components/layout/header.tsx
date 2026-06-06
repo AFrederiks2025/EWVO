@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { mainNav, primaryCta, siteConfig } from "@/lib/site";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { Logo } from "@/components/layout/logo";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 
 export function Header() {
@@ -24,9 +25,7 @@ export function Header() {
           href="/"
           className="flex items-center gap-2 text-lg font-semibold tracking-tight"
         >
-          <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-brand text-sm font-bold text-brand-foreground">
-            E
-          </span>
+          <Logo className="h-8 w-8 rounded-lg" />
           <span>{siteConfig.name}</span>
         </Link>
 
