@@ -137,3 +137,36 @@
     transition-delay: 0.49s;
   }
 }
+
+/*
+ * Hero-entree bij het laden — direct zichtbaar zonder scrollen.
+ * `backwards` houdt de begintoestand vast tijdens de delay en geeft daarna de
+ * besturing terug aan de ScrollFade op de titel (geen blijvende override).
+ */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-enter > * {
+    animation: hero-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+  .hero-enter > *:nth-child(2) {
+    animation-delay: 0.08s;
+  }
+  .hero-enter > *:nth-child(3) {
+    animation-delay: 0.16s;
+  }
+  .hero-enter > *:nth-child(4) {
+    animation-delay: 0.24s;
+  }
+  .hero-enter > *:nth-child(5) {
+    animation-delay: 0.32s;
+  }
+}

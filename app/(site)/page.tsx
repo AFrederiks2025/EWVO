@@ -70,7 +70,7 @@ export default async function HomePage() {
         >
           <div className="mt-[-120px] h-[460px] w-[720px] max-w-full rounded-full bg-accent/12 blur-3xl" />
         </Parallax>
-        <Container className="flex flex-col items-center py-20 text-center sm:py-28">
+        <Container className="hero-enter flex flex-col items-center py-20 text-center sm:py-28">
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-sm text-muted-foreground">
             Voorheen {siteConfig.formerName}
           </span>

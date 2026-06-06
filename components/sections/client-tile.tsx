@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { brandGradients } from "@/lib/gradients";
 import type { CaseStudy } from "@/lib/content/cases";
 
-/** Initialen als merk-placeholder zolang er geen echt logo is. */
+/** Initialen als merk-placeholder zolang er geen screenshot is. */
 function initials(name: string) {
   const words = name
     .replace(/[^\p{L}\s]/gu, " ")
@@ -18,9 +18,9 @@ function initials(name: string) {
 }
 
 /**
- * Compacte klant-tegel voor de logowall op /werk.
- * Toont initialen in een merk-gradiënt als placeholder.
- * TODO: vervang de initialen door echte klantlogo's zodra aangeleverd.
+ * Klant-tegel voor de filterbare logowall op /werk.
+ * Toont de echte website-screenshot; valt terug op een merk-gradiënt met
+ * initialen voor cases zonder beeld.
  */
 export function ClientTile({
   client,
@@ -32,21 +32,38 @@ export function ClientTile({
   return (
     <Link
       href={`/werk/${client.slug}`}
-      className="group flex flex-col items-center justify-center gap-3 rounded-2xl border border-border bg-card p-6 text-center transition-colors hover:border-brand/50"
+      className="group overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-brand/50"
     >
-      <span
-        className={cn(
-          "flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br text-sm font-bold text-white",
-          brandGradients[index % brandGradients.length],
+      <div className="relative aspect-[16/10]">
+        {client.image ? (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={client.image}
+              alt={`Website van ${client.client}`}
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-black/35 to-transparent" />
+          </>
+        ) : (
+          <div
+            className={cn(
+              "absolute inset-0 flex items-center justify-center bg-linear-to-br text-lg font-bold text-white",
+              brandGradients[index % brandGradients.length],
+            )}
+            aria-hidden
+          >
+            {initials(client.client)}
+          </div>
         )}
-        aria-hidden
-      >
-        {initials(client.client)}
-      </span>
-      <span className="text-sm font-medium leading-tight transition-colors group-hover:text-brand">
-        {client.client}
-      </span>
-      <span className="text-xs text-muted-foreground">{client.sector}</span>
+      </div>
+      <div className="p-4 text-center">
+        <p className="text-sm font-medium leading-tight transition-colors group-hover:text-brand">
+          {client.client}
+        </p>
+        <p className="mt-1 text-xs text-muted-foreground">{client.sector}</p>
+      </div>
     </Link>
   );
 }
