@@ -11,6 +11,7 @@ export type Post = {
   date: string; // ISO
   author: string;
   category: string;
+  imageUrl?: string; // uitgelicht beeld (uit Sanity); seed-posts hebben er geen
   body: string[]; // paragrafen
 };
 

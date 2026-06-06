@@ -27,7 +27,7 @@ export const caseQuery = `*[_type == "caseStudy" && slug.current == $slug][0]{
 }`;
 
 export const postsQuery = `*[_type == "post"] | order(date desc){
-  "slug": slug.current, title, excerpt, date, author, category
+  "slug": slug.current, title, excerpt, date, author, category, "imageUrl": image.asset->url
 }`;
 
 export const postSlugsQuery = `*[_type == "post" && defined(slug.current)].slug.current`;

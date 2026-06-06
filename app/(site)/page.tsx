@@ -238,8 +238,8 @@ export default async function HomePage() {
             </Link>
           </div>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {posts.slice(0, 3).map((post) => (
-              <PostCard key={post.slug} post={post} />
+            {posts.slice(0, 3).map((post, i) => (
+              <PostCard key={post.slug} post={post} index={i} />
             ))}
           </div>
         </Container>
