@@ -93,6 +93,22 @@ export const cases: CaseStudy[] = [
     featured: false,
   },
   {
+    slug: "de-sprong-voorwaarts",
+    client: "De Sprong Voorwaarts",
+    sector: "Zorg",
+    summary:
+      "Een rustige, warme website die ruimte geeft aan ervarings- en lichaamsgerichte therapie.",
+    featured: true,
+    url: "https://www.desprongvoorwaarts.nl",
+    problem:
+      "De praktijk richt zich op mensen die zich ‘vast, op en uitgeblust’ voelen en vaak twijfelen om hulp te zoeken. De website moest rust en veiligheid uitstralen, de stap naar contact klein maken en een gevoelsmatige, lichaamsgerichte aanpak uitleggen zonder jargon — waar een klinische of drukke site juist zou afschrikken.",
+    approach:
+      "We kozen rust en ruimte als ontwerpprincipe: warme, jargonvrije taal in de eigen tone-of-voice van de praktijk (‘je hoeft je hier niet uit te leggen’), een heldere opbouw — de therapeut, de therapie, de aanpak en praktische info — en één duidelijke, laagdrempelige vervolgstap: ‘plan een intake’.",
+    // TODO: meetbare resultaten (bijv. intake-aanvragen) + echte klantquote aanleveren.
+    result:
+      "Een serene, toegankelijke website die de praktijk professioneel en uitnodigend neerzet, de drie principes — lichaamsgericht, ervaringsgericht en in verbinding — helder uitlegt en bezoekers rustig naar een intake leidt.",
+  },
+  {
     slug: "opinzicht",
     client: "Opinzicht.nl",
     sector: "Dienstverlening",
