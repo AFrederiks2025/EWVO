@@ -44,6 +44,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full`}
     >
       <body className="flex min-h-full flex-col antialiased">
+        <noscript>
+          {/* Zonder JS: toon alle scroll-reveal-elementen direct. */}
+          <style>{`.reveal-item,.reveal>*{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

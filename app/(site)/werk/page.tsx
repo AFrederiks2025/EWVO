@@ -7,6 +7,7 @@ import { ClientDirectory } from "@/components/sections/client-directory";
 import { CaseCard } from "@/components/sections/case-card";
 import { TestimonialCard } from "@/components/sections/testimonial-card";
 import { CtaBanner } from "@/components/sections/cta-banner";
+import { Stagger } from "@/components/motion/stagger";
 
 export const metadata: Metadata = {
   title: "Klanten & cases — Ons werk",
@@ -50,11 +51,11 @@ export default async function WerkPage() {
               title="Projecten waar we trots op zijn"
               description="Een dieper kijkje in een aantal recente trajecten."
             />
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <Stagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {featured.map((study, i) => (
                 <CaseCard key={study.slug} study={study} index={i} />
               ))}
-            </div>
+            </Stagger>
           </Container>
         </Section>
       )}
@@ -69,11 +70,11 @@ export default async function WerkPage() {
               description="Persoonlijk, strategisch en zorgeloos — dat horen we het vaakst terug."
               centered
             />
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <Stagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {testimonials.map((t) => (
                 <TestimonialCard key={t.id} testimonial={t} />
               ))}
-            </div>
+            </Stagger>
           </Container>
         </Section>
       )}

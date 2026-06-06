@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, Star, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { mainNav, primaryCta, reviewCta, siteConfig } from "@/lib/site";
@@ -14,9 +14,17 @@ import { ThemeToggle } from "@/components/layout/theme-toggle";
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(`${href}/`);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
@@ -38,7 +46,12 @@ export function Header() {
       </div>
 
       <header className="sticky top-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <Container className="flex h-16 items-center justify-between gap-4">
+        <Container
+          className={cn(
+            "flex items-center justify-between gap-4 transition-all duration-300 motion-reduce:transition-none",
+            scrolled ? "h-14" : "h-16",
+          )}
+        >
           <Link
             href="/"
             className="flex items-center gap-2 text-lg font-semibold tracking-tight"

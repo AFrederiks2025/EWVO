@@ -2,10 +2,11 @@ import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { pricingTiers } from "@/lib/content/pricing";
 import { ButtonLink } from "@/components/ui/button";
+import { Stagger } from "@/components/motion/stagger";
 
 export function PricingTable() {
   return (
-    <div className="grid gap-6 lg:grid-cols-4">
+    <Stagger className="grid gap-6 lg:grid-cols-4">
       {pricingTiers.map((tier) => (
         <div
           key={tier.name}
@@ -50,6 +51,6 @@ export function PricingTable() {
           </ButtonLink>
         </div>
       ))}
-    </div>
+    </Stagger>
   );
 }

@@ -4,6 +4,7 @@ import { Container, Section } from "@/components/ui/container";
 import { PageHeader } from "@/components/sections/page-header";
 import { PostCard } from "@/components/sections/post-card";
 import { CtaBanner } from "@/components/sections/cta-banner";
+import { Stagger } from "@/components/motion/stagger";
 
 export const metadata: Metadata = {
   title: "Blog — Inzichten over Webdesign, SEO & Online Groei",
@@ -24,11 +25,11 @@ export default async function BlogPage() {
       />
       <Section>
         <Container>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Stagger className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {posts.map((post, i) => (
               <PostCard key={post.slug} post={post} index={i} />
             ))}
-          </div>
+          </Stagger>
         </Container>
       </Section>
       <CtaBanner />

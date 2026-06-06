@@ -93,3 +93,47 @@
       transparent 70%
     );
 }
+
+/*
+ * Scroll-reveal: fade-in + slide-up met Apple-easing.
+ * Alles binnen @media (prefers-reduced-motion: no-preference): wie reduced
+ * motion instelt, krijgt géén verborgen begintoestand en dus geen animatie.
+ * .reveal-item = los element (<FadeIn>), .reveal = container met stagger (<Stagger>).
+ * Alleen opacity/transform → geen layout shift.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-item,
+  .reveal > * {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-item.in-view,
+  .reveal.in-view > * {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal.in-view > *:nth-child(2) {
+    transition-delay: 0.07s;
+  }
+  .reveal.in-view > *:nth-child(3) {
+    transition-delay: 0.14s;
+  }
+  .reveal.in-view > *:nth-child(4) {
+    transition-delay: 0.21s;
+  }
+  .reveal.in-view > *:nth-child(5) {
+    transition-delay: 0.28s;
+  }
+  .reveal.in-view > *:nth-child(6) {
+    transition-delay: 0.35s;
+  }
+  .reveal.in-view > *:nth-child(7) {
+    transition-delay: 0.42s;
+  }
+  .reveal.in-view > *:nth-child(8) {
+    transition-delay: 0.49s;
+  }
+}
