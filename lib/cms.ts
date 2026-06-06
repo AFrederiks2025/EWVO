@@ -99,10 +99,41 @@ export function getTeam(): Promise<TeamMemberItem[]> {
 
 /* ------------------------------------ Cases ----------------------------------- */
 
+/**
+ * Voegt een Sanity-case samen met de bijbehorende seed-case.
+ * De seed is leidend voor `image` (onze screenshots) en `featured`; Sanity
+ * mag de tekstvelden overschrijven zolang die gevuld zijn. Zo blijven onze
+ * screenshots en uitgelichte selectie staan, ook als Sanity ze (nog) niet kent.
+ */
+function mergeCaseWithSeed(seed: CaseStudy, sanity: CaseStudy): CaseStudy {
+  return {
+    ...seed,
+    sector: sanity.sector || seed.sector,
+    summary: sanity.summary || seed.summary,
+    url: sanity.url || seed.url,
+    problem: sanity.problem || seed.problem,
+    approach: sanity.approach || seed.approach,
+    result: sanity.result || seed.result,
+    quote: sanity.quote || seed.quote,
+    image: sanity.image || seed.image,
+  };
+}
+
+function mergeCases(sanity: CaseStudy[]): CaseStudy[] {
+  const sanityBySlug = new Map(sanity.map((c) => [c.slug, c]));
+  const merged = seedCases.map((seed) => {
+    const s = sanityBySlug.get(seed.slug);
+    return s ? mergeCaseWithSeed(seed, s) : seed;
+  });
+  const seedSlugs = new Set(seedCases.map((c) => c.slug));
+  // Eventuele Sanity-only cases (zonder seed-tegenhanger) achteraan toevoegen.
+  return [...merged, ...sanity.filter((c) => !seedSlugs.has(c.slug))];
+}
+
 export function getCases(): Promise<CaseStudy[]> {
   return safeFetch(async () => {
     const data = await cfetch<CaseStudy[]>(q.casesQuery);
-    return data?.length ? data : seedCases;
+    return data?.length ? mergeCases(data) : seedCases;
   }, seedCases);
 }
 
@@ -114,7 +145,9 @@ export function getCase(slug: string): Promise<CaseStudy | null> {
   return safeFetch(
     async () => {
       const data = await cfetch<CaseStudy | null>(q.caseQuery, { slug });
-      return data ?? seedCases.find((c) => c.slug === slug) ?? null;
+      const seed = seedCases.find((c) => c.slug === slug) ?? null;
+      if (!seed) return data;
+      return data ? mergeCaseWithSeed(seed, data) : seed;
     },
     seedCases.find((c) => c.slug === slug) ?? null,
   );
@@ -123,7 +156,9 @@ export function getCase(slug: string): Promise<CaseStudy | null> {
 export function getCaseSlugs(): Promise<string[]> {
   return safeFetch(async () => {
     const data = await cfetch<string[]>(q.caseSlugsQuery);
-    return data?.length ? data : seedCases.map((c) => c.slug);
+    // Unie van Sanity- en seed-slugs, zodat ook seed-only cases (SL-Audio) een
+    // statisch gerenderde detailpagina krijgen.
+    return [...new Set([...(data ?? []), ...seedCases.map((c) => c.slug)])];
   }, seedCases.map((c) => c.slug));
 }
 
