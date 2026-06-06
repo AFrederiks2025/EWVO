@@ -4,7 +4,6 @@ import { testimonials } from "@/lib/content/testimonials";
 import { Container, Section, SectionHeading } from "@/components/ui/container";
 import { PageHeader } from "@/components/sections/page-header";
 import { ClientDirectory } from "@/components/sections/client-directory";
-import { CaseCard } from "@/components/sections/case-card";
 import { TestimonialCard } from "@/components/sections/testimonial-card";
 import { CtaBanner } from "@/components/sections/cta-banner";
 import { Stagger } from "@/components/motion/stagger";
@@ -18,7 +17,6 @@ export const metadata: Metadata = {
 
 export default async function WerkPage() {
   const cases = await getCases();
-  const featured = cases.filter((c) => c.featured);
 
   return (
     <>
@@ -41,24 +39,6 @@ export default async function WerkPage() {
           </div>
         </Container>
       </Section>
-
-      {/* Uitgelichte cases */}
-      {featured.length > 0 && (
-        <Section className="bg-muted/40">
-          <Container>
-            <SectionHeading
-              eyebrow="Uitgelicht"
-              title="Projecten waar we trots op zijn"
-              description="Een dieper kijkje in een aantal recente trajecten."
-            />
-            <Stagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {featured.map((study, i) => (
-                <CaseCard key={study.slug} study={study} index={i} />
-              ))}
-            </Stagger>
-          </Container>
-        </Section>
-      )}
 
       {/* Reviews */}
       {testimonials.length > 0 && (
