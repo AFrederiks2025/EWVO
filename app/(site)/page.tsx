@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Banknote, Check, Compass, ListChecks, Users } from "lucide-react";
 import { getServices, getFeaturedCases, getPosts } from "@/lib/cms";
 import { primaryCta, siteConfig } from "@/lib/site";
 import { Container, Section, SectionHeading } from "@/components/ui/container";
@@ -24,6 +24,30 @@ const stats = [
   { value: "100+", label: "tevreden klanten" },
   { value: "6", label: "vaste teamleden" },
   { value: "5", label: "dienstpijlers" },
+];
+
+// Vier Scaling Up-pijlers — zo denken we strategisch met klanten mee.
+const pillars = [
+  {
+    icon: Users,
+    title: "Mensen",
+    text: "De juiste mensen op de juiste plek, met heldere rollen en verantwoordelijkheden.",
+  },
+  {
+    icon: Compass,
+    title: "Strategie",
+    text: "Een scherpe positionering en merkbeloften waarmee je je onderscheidt.",
+  },
+  {
+    icon: ListChecks,
+    title: "Uitvoering",
+    text: "Ritme en focus, zodat plannen ook echt gebeuren — zonder gedoe.",
+  },
+  {
+    icon: Banknote,
+    title: "Cash",
+    text: "Gezonde cashflow als zuurstof om door te blijven groeien.",
+  },
 ];
 
 export default async function HomePage() {
@@ -115,6 +139,36 @@ export default async function HomePage() {
               </div>
             ))}
           </dl>
+        </Container>
+      </Section>
+
+      <Section>
+        <Container>
+          <SectionHeading
+            eyebrow="Onze aanpak"
+            title="We denken met je mee op vier vlakken"
+            description="Geïnspireerd op de bewezen Scaling Up-groeimethode kijken we verder dan je website: van mensen en strategie tot uitvoering en cashflow. Zo groei je structureel — niet bij toeval."
+            centered
+          />
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {pillars.map((pillar) => {
+              const Icon = pillar.icon;
+              return (
+                <div
+                  key={pillar.title}
+                  className="rounded-2xl border border-border bg-card p-6"
+                >
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-muted text-brand">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="mt-5 text-lg font-semibold">{pillar.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    {pillar.text}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
         </Container>
       </Section>
 
