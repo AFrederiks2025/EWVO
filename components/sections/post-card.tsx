@@ -1,4 +1,15 @@
 import Link from "next/link";
+import {
+  Compass,
+  Megaphone,
+  Newspaper,
+  Palette,
+  PenLine,
+  Rocket,
+  Search,
+  ShieldCheck,
+  ShoppingCart,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { brandGradients } from "@/lib/gradients";
 import { formatDate, type Post } from "@/lib/content/posts";
@@ -8,6 +19,18 @@ type PostCardData = Pick<
   "slug" | "title" | "excerpt" | "date" | "author" | "category" | "imageUrl"
 >;
 
+/** Categorie → passend icoon voor de cover als er (nog) geen foto is. */
+const categoryIcons: Record<string, typeof Compass> = {
+  Strategie: Compass,
+  Design: Palette,
+  SEO: Search,
+  "E-commerce": ShoppingCart,
+  Marketing: Megaphone,
+  Techniek: ShieldCheck,
+  Content: PenLine,
+  Ondernemen: Rocket,
+};
+
 export function PostCard({
   post,
   index = 0,
@@ -15,6 +38,7 @@ export function PostCard({
   post: PostCardData;
   index?: number;
 }) {
+  const Icon = categoryIcons[post.category] ?? Newspaper;
   return (
     <Link
       href={`/blog/${post.slug}`}
@@ -35,13 +59,16 @@ export function PostCard({
             <div className="absolute inset-0 bg-linear-to-t from-black/35 to-transparent" />
           </>
         ) : (
-          // Geen beeld → merk-gradiënt (blijft binnen de huisstijl, dus uniform)
+          // Geen foto → merk-gradiënt met categorie-icoon (uniforme cover)
           <div
             className={cn(
-              "absolute inset-0 bg-linear-to-br",
+              "absolute inset-0 flex items-center justify-center bg-linear-to-br",
               brandGradients[index % brandGradients.length],
             )}
-          />
+            aria-hidden
+          >
+            <Icon className="h-12 w-12 text-white/70" strokeWidth={1.5} />
+          </div>
         )}
         <span className="absolute bottom-3 left-3 rounded-full bg-black/25 px-3 py-1 text-xs font-medium text-white backdrop-blur">
           {post.category}
