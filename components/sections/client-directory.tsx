@@ -52,7 +52,7 @@ export function ClientDirectory({ clients }: { clients: CaseStudy[] }) {
         })}
       </div>
 
-      <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
+      <div className="mt-8 grid grid-cols-1 gap-6">
         {filtered.map((client, i) => (
           <ClientTile key={client.slug} client={client} index={i} />
         ))}
