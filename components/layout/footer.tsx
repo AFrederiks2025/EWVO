@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Mail, Phone } from "lucide-react";
-import { mainNav, siteConfig } from "@/lib/site";
+import { Mail, Phone, Star } from "lucide-react";
+import { mainNav, reviewCta, siteConfig } from "@/lib/site";
 import { getServices, getSiteSettings } from "@/lib/cms";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/layout/logo";
@@ -26,6 +26,15 @@ export async function Footer() {
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
               {settings.description}
             </p>
+            <a
+              href={reviewCta.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-brand hover:underline"
+            >
+              <Star className="h-4 w-4 shrink-0" aria-hidden />
+              {reviewCta.label}
+            </a>
           </div>
 
           <div>

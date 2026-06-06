@@ -41,9 +41,16 @@ export type NavItem = { label: string; href: string };
 export const mainNav: NavItem[] = [
   { label: "Diensten", href: "/diensten" },
   { label: "Werk", href: "/werk" },
+  { label: "Reviews", href: "/reviews" },
   { label: "Over ons", href: "/over-ons" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
 
 export const primaryCta = { label: "Plan een gratis adviesgesprek", href: "/contact" };
+
+/** Externe Google-link om een review te schrijven (header, footer en /reviews). */
+export const reviewCta = {
+  label: "Schrijf een review voor de impact van deze samenwerking",
+  href: "https://search.google.com/local/writereview?placeid=ChIJ-1l-OzLfx0cR6Ahm-jUHHN8",
+};
