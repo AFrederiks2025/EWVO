@@ -35,14 +35,21 @@ export const siteConfig = {
   ],
 } as const;
 
-export type NavItem = { label: string; href: string };
+export type NavItem = { label: string; href: string; children?: NavItem[] };
 
 /** Hoofdnavigatie — Nederlandse routes (GATE-A). */
 export const mainNav: NavItem[] = [
   { label: "Diensten", href: "/diensten" },
   { label: "Werk", href: "/werk" },
   { label: "Reviews", href: "/reviews" },
-  { label: "Over ons", href: "/over-ons" },
+  {
+    label: "Over ons",
+    href: "/over-ons",
+    children: [
+      { label: "Over ons", href: "/over-ons" },
+      { label: "Team EWVO", href: "/over-ons/team" },
+    ],
+  },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];

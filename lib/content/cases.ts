@@ -2,6 +2,8 @@
  * Cases / opdrachtgevers — bron: eenwebsitevanons.nl (/klanten).
  * `featured: true` = launch-case (volledig uitgewerkt, zie MERGE-PLAN.md §6B).
  * `image` = echte website-screenshot in public/cases/<slug>.jpg.
+ * `card`  = samengestelde EWVO-portfoliokaart in public/cases/cards/<slug>.jpg
+ *           (gebruikt op /werk; bevat al naam, sector, screenshot en CTA).
  * TODO: echte teksten, resultaten en quotes aanleveren (gap #3/#4).
  */
 export type CaseStudy = {
@@ -11,6 +13,7 @@ export type CaseStudy = {
   summary: string;
   featured: boolean;
   image?: string;
+  card?: string;
   url?: string;
   problem?: string;
   approach?: string;
@@ -27,6 +30,7 @@ export const cases: CaseStudy[] = [
       "Na 7 jaar toe aan een revisie: een snellere, frissere website die meegroeit met de winkel.",
     featured: true,
     image: "/cases/brommer-winkel-voorthuizen.jpg",
+    card: "/cases/cards/brommer-winkel-voorthuizen.jpg",
     problem:
       "Een website die na jaren niet meer paste bij het bedrijf: traag, gedateerd en lastig te onderhouden.",
     approach:
@@ -42,6 +46,7 @@ export const cases: CaseStudy[] = [
       "Een persoonlijke huisstijl en website die de kracht van de coach uitstraalt.",
     featured: true,
     image: "/cases/krachtcoach.jpg",
+    card: "/cases/cards/krachtcoach.jpg",
     problem: "TODO: probleemstelling aanleveren.",
     approach: "TODO: aanpak aanleveren.",
     result: "TODO: resultaat aanleveren.",
@@ -53,6 +58,7 @@ export const cases: CaseStudy[] = [
     summary: "Een energieke website die leden inspireert om in beweging te komen.",
     featured: true,
     image: "/cases/stayfitnl.jpg",
+    card: "/cases/cards/stayfitnl.jpg",
     problem: "TODO: probleemstelling aanleveren.",
     approach: "TODO: aanpak aanleveren.",
     result: "TODO: resultaat aanleveren.",
@@ -64,6 +70,7 @@ export const cases: CaseStudy[] = [
     summary: "Een rustige, professionele uitstraling die vertrouwen wekt.",
     featured: true,
     image: "/cases/approach-of-life.jpg",
+    card: "/cases/cards/approach-of-life.jpg",
     problem: "TODO: probleemstelling aanleveren.",
     approach: "TODO: aanpak aanleveren.",
     result: "TODO: resultaat aanleveren.",
@@ -76,6 +83,7 @@ export const cases: CaseStudy[] = [
       "Een strakke, sfeervolle website die de audio-regie voor live events laat spreken.",
     featured: true,
     image: "/cases/sl-audio.jpg",
+    card: "/cases/cards/sl-audio.jpg",
     url: "https://sl-audio.ewvo.nl",
     problem:
       "SL-Audio is geen kistenboer maar audio-regiepartner — de technische rustbrenger van een live event. Dat onderscheid moest de website direct overbrengen: strak en sfeervol, zonder in standaard ‘geluidstechniek’-clichés te vervallen.",
@@ -92,6 +100,7 @@ export const cases: CaseStudy[] = [
       "Een rustige, warme website die ruimte geeft aan ervarings- en lichaamsgerichte therapie.",
     featured: true,
     image: "/cases/de-sprong-voorwaarts.jpg",
+    card: "/cases/cards/de-sprong-voorwaarts.jpg",
     url: "https://www.desprongvoorwaarts.nl",
     problem:
       "De praktijk richt zich op mensen die zich ‘vast, op en uitgeblust’ voelen en vaak twijfelen om hulp te zoeken. De website moest rust en veiligheid uitstralen, de stap naar contact klein maken en een gevoelsmatige, lichaamsgerichte aanpak uitleggen zonder jargon — waar een klinische of drukke site juist zou afschrikken.",
@@ -109,6 +118,7 @@ export const cases: CaseStudy[] = [
     summary: "Een warme, uitnodigende website voor de gemeenschap.",
     featured: false,
     image: "/cases/kerk-vol-kracht.jpg",
+    card: "/cases/cards/kerk-vol-kracht.jpg",
   },
   {
     slug: "be-you-ti-ful",
@@ -125,6 +135,7 @@ export const cases: CaseStudy[] = [
     summary: "Een sfeervolle site die gasten direct laat boeken.",
     featured: false,
     image: "/cases/bnb-de-oude-bank.jpg",
+    card: "/cases/cards/bnb-de-oude-bank.jpg",
   },
   {
     slug: "relatiezorg-nu",
@@ -133,6 +144,7 @@ export const cases: CaseStudy[] = [
     summary: "Een toegankelijke website die drempels wegneemt.",
     featured: false,
     image: "/cases/relatiezorg-nu.jpg",
+    card: "/cases/cards/relatiezorg-nu.jpg",
   },
   {
     slug: "opinzicht",
@@ -141,6 +153,7 @@ export const cases: CaseStudy[] = [
     summary: "Een heldere website die overzicht brengt.",
     featured: false,
     image: "/cases/opinzicht.jpg",
+    card: "/cases/cards/opinzicht.jpg",
   },
   {
     slug: "freerun-academie",
@@ -149,6 +162,7 @@ export const cases: CaseStudy[] = [
     summary: "Een dynamische website vol beweging en energie.",
     featured: false,
     image: "/cases/freerun-academie.jpg",
+    card: "/cases/cards/freerun-academie.jpg",
   },
 ];
 

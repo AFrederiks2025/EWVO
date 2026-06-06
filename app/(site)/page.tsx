@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { ArrowRight, Banknote, Check, Compass, ListChecks, Users } from "lucide-react";
-import { getServices, getFeaturedCases, getPosts } from "@/lib/cms";
+import { getServices, getFeaturedCases, getPosts, getTeam } from "@/lib/cms";
 import { primaryCta, siteConfig } from "@/lib/site";
 import { Container, Section, SectionHeading } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
 import { ServiceCard } from "@/components/sections/service-card";
 import { CaseCard } from "@/components/sections/case-card";
+import { TeamAvatar } from "@/components/sections/team-avatar";
 import { PostCard } from "@/components/sections/post-card";
 import { PricingTable } from "@/components/sections/pricing-table";
 import { ProcessSteps } from "@/components/sections/process-steps";
@@ -55,10 +56,11 @@ const pillars = [
 ];
 
 export default async function HomePage() {
-  const [services, featuredCases, posts] = await Promise.all([
+  const [services, featuredCases, posts, team] = await Promise.all([
     getServices(),
     getFeaturedCases(),
     getPosts(),
+    getTeam(),
   ]);
 
   return (
@@ -183,6 +185,44 @@ export default async function HomePage() {
                 </div>
               );
             })}
+          </Stagger>
+        </Container>
+      </Section>
+
+      <Section className="bg-muted/40">
+        <Container>
+          <FadeIn className="flex flex-wrap items-end justify-between gap-4">
+            <SectionHeading
+              eyebrow="Het team"
+              title="De mensen achter EWVO"
+              description="Eén vast team dat je leert kennen en dat met je meedenkt."
+            />
+            <Link
+              href="/over-ons/team"
+              className="inline-flex items-center gap-1 text-sm font-medium text-brand hover:underline"
+            >
+              Bekijk het team
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </FadeIn>
+          <Stagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {team.map((member, i) => (
+              <div
+                key={member.slug}
+                className="rounded-2xl border border-border bg-card p-6"
+              >
+                <TeamAvatar
+                  name={member.name}
+                  index={i}
+                  className="h-16 w-16 rounded-2xl"
+                />
+                <h3 className="mt-4 font-semibold">{member.name}</h3>
+                <p className="text-sm text-brand">{member.role}</p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  {member.bio}
+                </p>
+              </div>
+            ))}
           </Stagger>
         </Container>
       </Section>

@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { brandGradients } from "@/lib/gradients";
 import type { CaseStudy } from "@/lib/content/cases";
 
-/** Initialen als merk-placeholder zolang er geen screenshot is. */
+/** Initialen als merk-placeholder zolang er geen beeld is. */
 function initials(name: string) {
   const words = name
     .replace(/[^\p{L}\s]/gu, " ")
@@ -18,9 +18,10 @@ function initials(name: string) {
 }
 
 /**
- * Klant-tegel voor de filterbare logowall op /werk.
- * Toont de echte website-screenshot; valt terug op een merk-gradiënt met
- * initialen voor cases zonder beeld.
+ * Klant-tegel voor de filterbare portfolio-galerij op /werk.
+ * Toont bij voorkeur de samengestelde EWVO-card (bevat al naam, sector,
+ * screenshot en CTA). Anders de website-screenshot met naam/sector-overlay,
+ * en als laatste terugval een merk-gradiënt met initialen.
  */
 export function ClientTile({
   client,
@@ -32,24 +33,42 @@ export function ClientTile({
   return (
     <Link
       href={`/werk/${client.slug}`}
-      className="group overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-brand/50"
+      className="group block overflow-hidden rounded-2xl border border-border bg-card transition-all hover:border-brand/50 hover:shadow-sm"
     >
-      <div className="relative aspect-[16/10]">
-        {client.image ? (
+      <div className="relative aspect-[3/2]">
+        {client.card ? (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={client.card}
+              alt={`EWVO-case: ${client.client}`}
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+            />
+          </>
+        ) : client.image ? (
           <>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={client.image}
               alt={`Website van ${client.client}`}
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+              className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
             />
-            <div className="absolute inset-0 bg-linear-to-t from-black/35 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/55 via-black/5 to-transparent" />
+            <div className="absolute inset-x-4 bottom-4 flex items-center justify-between gap-2">
+              <span className="text-sm font-semibold text-white">
+                {client.client}
+              </span>
+              <span className="rounded-full bg-white/20 px-2.5 py-0.5 text-xs font-medium text-white backdrop-blur">
+                {client.sector}
+              </span>
+            </div>
           </>
         ) : (
           <div
             className={cn(
-              "absolute inset-0 flex items-center justify-center bg-linear-to-br text-lg font-bold text-white",
+              "absolute inset-0 flex items-center justify-center bg-linear-to-br text-2xl font-bold text-white",
               brandGradients[index % brandGradients.length],
             )}
             aria-hidden
@@ -57,12 +76,6 @@ export function ClientTile({
             {initials(client.client)}
           </div>
         )}
-      </div>
-      <div className="p-4 text-center">
-        <p className="text-sm font-medium leading-tight transition-colors group-hover:text-brand">
-          {client.client}
-        </p>
-        <p className="mt-1 text-xs text-muted-foreground">{client.sector}</p>
       </div>
     </Link>
   );
