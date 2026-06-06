@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Printer, RotateCcw } from "lucide-react";
-import { cn } from "@/lib/utils";
 import {
   scalingUpPillars,
   type SUBlock,
