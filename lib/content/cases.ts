@@ -91,6 +91,7 @@ export const cases: CaseStudy[] = [
     summary:
       "Een rustige, warme website die ruimte geeft aan ervarings- en lichaamsgerichte therapie.",
     featured: true,
+    image: "/cases/de-sprong-voorwaarts.jpg",
     url: "https://www.desprongvoorwaarts.nl",
     problem:
       "De praktijk richt zich op mensen die zich ‘vast, op en uitgeblust’ voelen en vaak twijfelen om hulp te zoeken. De website moest rust en veiligheid uitstralen, de stap naar contact klein maken en een gevoelsmatige, lichaamsgerichte aanpak uitleggen zonder jargon — waar een klinische of drukke site juist zou afschrikken.",
