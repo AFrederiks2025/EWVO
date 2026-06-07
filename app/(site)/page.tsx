@@ -65,35 +65,45 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="brand-glow relative overflow-hidden">
-        <Parallax
-          speed={0.3}
-          className="pointer-events-none absolute inset-x-0 top-0 -z-10 flex justify-center"
-        >
-          <div className="mt-[-120px] h-[460px] w-[720px] max-w-full rounded-full bg-accent/12 blur-3xl" />
+      <section className="relative isolate overflow-hidden">
+        {/* Achtergrondfoto met Apple-stijl parallax */}
+        <Parallax speed={0.2} className="absolute inset-x-0 -top-[8%] -z-20 h-[116%]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/hero-team.jpg"
+            alt="Het team van EWVO"
+            className="h-full w-full object-cover"
+          />
         </Parallax>
-        <Container className="hero-enter flex flex-col items-center py-20 text-center sm:py-28">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-sm text-muted-foreground">
+        {/* Donkere scrim voor leesbaarheid van de tekst */}
+        <div className="absolute inset-0 -z-10 bg-linear-to-b from-[#0e1a20]/85 via-[#0e1a20]/72 to-[#0e1a20]/90" />
+        <Container className="hero-enter flex flex-col items-center py-24 text-center sm:py-36">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm text-white/90 backdrop-blur">
             Voorheen {siteConfig.formerName}
           </span>
           <ScrollFade className="mt-6 w-full">
-            <h1 className="mx-auto max-w-4xl text-4xl font-semibold tracking-tight text-balance sm:text-5xl md:text-6xl">
+            <h1 className="mx-auto max-w-4xl text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl md:text-6xl">
               Digitale ecosystemen die{" "}
               <span className="text-brand">meegroeien</span> met jouw bedrijf
             </h1>
           </ScrollFade>
-          <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
+          <p className="mt-6 max-w-2xl text-lg text-white/80">
             {siteConfig.description}
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <ButtonLink href={primaryCta.href} size="lg">
               {primaryCta.label}
             </ButtonLink>
-            <ButtonLink href="/portfolio" size="lg" variant="outline">
+            <ButtonLink
+              href="/portfolio"
+              size="lg"
+              variant="outline"
+              className="border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white"
+            >
               Bekijk ons portfolio
             </ButtonLink>
           </div>
-          <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
+          <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/80">
             {usps.map((u) => (
               <li key={u} className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-brand" />
@@ -102,20 +112,6 @@ export default async function HomePage() {
             ))}
           </ul>
         </Container>
-        {/* Volle-breedte hero-foto met Apple-stijl parallax */}
-        <div className="relative mt-4 h-[52vh] w-full overflow-hidden sm:mt-8 sm:h-[62vh]">
-          <Parallax
-            speed={0.3}
-            className="absolute inset-x-0 -top-[12%] h-[125%]"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/hero-team.jpg"
-              alt="Het team van EWVO"
-              className="h-full w-full object-cover"
-            />
-          </Parallax>
-        </div>
       </section>
 
       <Section>
