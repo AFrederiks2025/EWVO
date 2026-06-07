@@ -8,14 +8,14 @@ const CANONICAL_HOST = "www.ewvo.nl";
  * tegen een echte crawl (GATE-B / Fase 0). Aanvullen na de nulmeting.
  */
 const VAN_ONS_MAP: Record<string, string> = {
-  "/klanten": "/werk",
+  "/klanten": "/portfolio",
   "/privacy-verklaring": "/privacy",
 };
 
 function mapVanOnsPath(pathname: string): string {
   if (VAN_ONS_MAP[pathname]) return VAN_ONS_MAP[pathname];
-  // Individuele case-detailpagina's → /werk (catch); blog-slugs blijven gelijk.
-  if (pathname.startsWith("/klanten/")) return "/werk";
+  // Individuele case-detailpagina's → /portfolio (catch); blog-slugs blijven gelijk.
+  if (pathname.startsWith("/klanten/")) return "/portfolio";
   return pathname;
 }
 
