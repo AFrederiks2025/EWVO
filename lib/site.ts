@@ -40,7 +40,7 @@ export type NavItem = { label: string; href: string; children?: NavItem[] };
 /** Hoofdnavigatie — Nederlandse routes (GATE-A). */
 export const mainNav: NavItem[] = [
   { label: "Diensten", href: "/diensten" },
-  { label: "Werk", href: "/werk" },
+  { label: "Portfolio", href: "/werk" },
   { label: "Reviews", href: "/reviews" },
   {
     label: "Over ons",

@@ -9,9 +9,9 @@ import { CtaBanner } from "@/components/sections/cta-banner";
 import { Stagger } from "@/components/motion/stagger";
 
 export const metadata: Metadata = {
-  title: "Klanten & cases — Ons werk",
+  title: "Portfolio",
   description:
-    "Een greep uit de opdrachtgevers die met EWVO online groeien — van coaching en zorg tot hospitality, fitness en retail.",
+    "Ons portfolio: een greep uit de opdrachtgevers die met EWVO online groeien — van coaching en zorg tot hospitality, fitness en retail.",
   alternates: { canonical: "/werk" },
 };
 
@@ -21,7 +21,7 @@ export default async function WerkPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Klanten & portfolio"
+        eyebrow="Portfolio"
         title="Opdrachtgevers die met ons groeien"
         description="Van lokale ondernemers tot groeiende organisaties — een greep uit de klanten en projecten waar we trots op zijn."
       />
