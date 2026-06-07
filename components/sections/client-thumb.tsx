@@ -26,7 +26,7 @@ export function ClientThumb({
 }) {
   return (
     <Link
-      href={`/werk/${client.slug}`}
+      href={`/portfolio/${client.slug}`}
       className="group overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-brand/50"
     >
       <div className="relative aspect-[16/10]">

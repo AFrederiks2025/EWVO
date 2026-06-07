@@ -9,7 +9,10 @@ const nextConfig: NextConfig = {
       { source: "/services", destination: "/diensten", permanent: true },
       { source: "/about", destination: "/over-ons", permanent: true },
       { source: "/terms", destination: "/algemene-voorwaarden", permanent: true },
-      { source: "/cases", destination: "/werk", permanent: true },
+      { source: "/cases", destination: "/portfolio", permanent: true },
+      // /werk is hernoemd naar /portfolio — oude links/SEO blijven werken.
+      { source: "/werk", destination: "/portfolio", permanent: true },
+      { source: "/werk/:slug", destination: "/portfolio/:slug", permanent: true },
       // Niet-werkende SPA-blogplaceholder van de oude ewvo.nl → blogoverzicht
       { source: "/blog/post", destination: "/blog", permanent: true },
     ];

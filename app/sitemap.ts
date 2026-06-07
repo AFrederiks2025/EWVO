@@ -15,7 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = [
     "",
     "/diensten",
-    "/werk",
+    "/portfolio",
     "/over-ons",
     "/over-ons/team",
     "/blog",
@@ -30,7 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const caseRoutes = caseSlugs.map((slug) => ({
-    url: `${base}/werk/${slug}`,
+    url: `${base}/portfolio/${slug}`,
     lastModified: now,
   }));
 

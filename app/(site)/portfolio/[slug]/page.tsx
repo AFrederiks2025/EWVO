@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: `${study.client} — Case`,
     description: study.summary,
-    alternates: { canonical: `/werk/${study.slug}` },
+    alternates: { canonical: `/portfolio/${study.slug}` },
   };
 }
 
@@ -45,10 +45,10 @@ export default async function CaseDetailPage({ params }: Params) {
       <section className="brand-glow border-b border-border">
         <Container className="py-16 sm:py-20">
           <Link
-            href="/werk"
+            href="/portfolio"
             className="text-sm text-muted-foreground hover:text-foreground"
           >
-            ← Alle cases
+            ← Portfolio
           </Link>
           <p className="mt-6 text-sm font-semibold uppercase tracking-wider text-brand">
             {study.sector}

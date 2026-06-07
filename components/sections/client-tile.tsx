@@ -28,7 +28,7 @@ function domainFromUrl(url?: string) {
 }
 
 /**
- * Portfolio-kaart voor de filterbare galerij op /werk — volledig in code
+ * Portfolio-kaart voor de filterbare galerij op /portfolio — volledig in code
  * (geen losse beeld-bestanden): links de tekst + sector + CTA, rechts de
  * website-screenshot in een browser-frame. Uniform voor alle cases.
  */
@@ -42,7 +42,7 @@ export function ClientTile({
   const domain = domainFromUrl(client.url);
   return (
     <Link
-      href={`/werk/${client.slug}`}
+      href={`/portfolio/${client.slug}`}
       className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-card transition-all hover:border-brand/50 hover:shadow-md sm:grid sm:grid-cols-5"
     >
       {/* Tekstpaneel */}

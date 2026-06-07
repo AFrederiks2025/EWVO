@@ -12,7 +12,7 @@ export function CaseCard({
 }) {
   return (
     <Link
-      href={`/werk/${study.slug}`}
+      href={`/portfolio/${study.slug}`}
       className="group overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-brand/50"
     >
       <div className="relative aspect-[16/10]">

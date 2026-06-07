@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: "Portfolio",
   description:
     "Ons portfolio: een greep uit de opdrachtgevers die met EWVO online groeien — van coaching en zorg tot hospitality, fitness en retail.",
-  alternates: { canonical: "/werk" },
+  alternates: { canonical: "/portfolio" },
 };
 
 export default async function WerkPage() {

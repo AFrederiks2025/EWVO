@@ -89,8 +89,8 @@ export default async function HomePage() {
             <ButtonLink href={primaryCta.href} size="lg">
               {primaryCta.label}
             </ButtonLink>
-            <ButtonLink href="/werk" size="lg" variant="outline">
-              Bekijk ons werk
+            <ButtonLink href="/portfolio" size="lg" variant="outline">
+              Bekijk ons portfolio
             </ButtonLink>
           </div>
           <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
@@ -235,7 +235,7 @@ export default async function HomePage() {
               title="Resultaten waar we trots op zijn"
             />
             <Link
-              href="/werk"
+              href="/portfolio"
               className="inline-flex items-center gap-1 text-sm font-medium text-brand hover:underline"
             >
               Alle cases
