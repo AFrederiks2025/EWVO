@@ -67,7 +67,18 @@ export function PostCard({
             )}
             aria-hidden
           >
-            <Icon className="h-12 w-12 text-white/70" strokeWidth={1.5} />
+            <div
+              className="absolute inset-0 opacity-[0.12]"
+              style={{
+                backgroundImage:
+                  "radial-gradient(circle, #fff 1px, transparent 1.5px)",
+                backgroundSize: "16px 16px",
+              }}
+            />
+            <Icon
+              className="relative h-12 w-12 text-white/80"
+              strokeWidth={1.5}
+            />
           </div>
         )}
         <span className="absolute bottom-3 left-3 rounded-full bg-black/25 px-3 py-1 text-xs font-medium text-white backdrop-blur">

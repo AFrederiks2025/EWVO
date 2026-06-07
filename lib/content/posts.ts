@@ -37,6 +37,7 @@ export const posts: Post[] = [
     date: "2023-03-10",
     author: "Team EWVO",
     category: "Design",
+    imageUrl: "/blog/webdesign-trends-2023.jpg",
     body: ["TODO: artikeltekst migreren."],
   },
   {
@@ -82,6 +83,7 @@ export const posts: Post[] = [
     date: "2018-04-12",
     author: "Team EWVO",
     category: "Content",
+    imageUrl: "/blog/content-marketing-2018.jpg",
     body: ["TODO: artikeltekst migreren."],
   },
   {

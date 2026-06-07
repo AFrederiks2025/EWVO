@@ -164,10 +164,22 @@ export function getCaseSlugs(): Promise<string[]> {
 
 /* ------------------------------------ Blog ------------------------------------ */
 
+/**
+ * Seed is leidend voor `imageUrl` (onze aangeleverde blog-covers): zo
+ * overschrijft Sanity onze beelden niet met een lege waarde. Sanity blijft
+ * leidend voor de tekst.
+ */
+function mergePostImage<T extends { slug: string; imageUrl?: string }>(
+  post: T,
+): T {
+  const seed = seedPosts.find((p) => p.slug === post.slug);
+  return seed?.imageUrl ? { ...post, imageUrl: seed.imageUrl } : post;
+}
+
 export function getPosts(): Promise<PostListItem[]> {
   return safeFetch(async () => {
     const data = await cfetch<PostListItem[]>(q.postsQuery);
-    return data?.length ? data : seedPostsByDate;
+    return data?.length ? data.map(mergePostImage) : seedPostsByDate;
   }, seedPostsByDate);
 }
 
@@ -180,7 +192,9 @@ export function getPost(slug: string): Promise<PostDetail | null> {
     const data = await cfetch<
       (Omit<Post, "body"> & { body?: PortableTextBlock[] }) | null
     >(q.postQuery, { slug });
-    return data ? { ...data, body: data.body ?? [] } : seedFallback();
+    return data
+      ? mergePostImage({ ...data, body: data.body ?? [] })
+      : seedFallback();
   }, seedFallback());
 }
 
