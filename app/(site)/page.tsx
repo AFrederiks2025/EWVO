@@ -101,15 +101,21 @@ export default async function HomePage() {
               </li>
             ))}
           </ul>
-          <div className="mt-14 w-full max-w-4xl">
+        </Container>
+        {/* Volle-breedte hero-foto met Apple-stijl parallax */}
+        <div className="relative mt-4 h-[52vh] w-full overflow-hidden sm:mt-8 sm:h-[62vh]">
+          <Parallax
+            speed={0.3}
+            className="absolute inset-x-0 -top-[12%] h-[125%]"
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/hero-team.jpg"
               alt="Het team van EWVO"
-              className="w-full rounded-2xl border border-border shadow-xl"
+              className="h-full w-full object-cover"
             />
-          </div>
-        </Container>
+          </Parallax>
+        </div>
       </section>
 
       <Section>
