@@ -42,6 +42,15 @@ export default async function OverOnsPage() {
         description="EWVO laat het MKB én de publieke sector zorgeloos online groeien."
       />
 
+      <Container className="pt-10 sm:pt-12">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/team-office.jpg"
+          alt="Het team van EWVO aan het werk"
+          className="w-full rounded-2xl border border-border object-cover shadow-sm"
+        />
+      </Container>
+
       <Section>
         <Container className="grid gap-12 lg:grid-cols-2">
           <div>
