@@ -101,6 +101,14 @@ export default async function HomePage() {
               </li>
             ))}
           </ul>
+          <div className="mt-14 w-full max-w-4xl">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/hero-team.jpg"
+              alt="Het team van EWVO"
+              className="w-full rounded-2xl border border-border shadow-xl"
+            />
+          </div>
         </Container>
       </section>
 

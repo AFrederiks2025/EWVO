@@ -169,4 +169,7 @@
   .hero-enter > *:nth-child(5) {
     animation-delay: 0.32s;
   }
+  .hero-enter > *:nth-child(6) {
+    animation-delay: 0.4s;
+  }
 }
