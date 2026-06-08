@@ -33,19 +33,19 @@ export const team: TeamMember[] = [
   {
     slug: "ardjan-de-boo",
     name: "Ardjan de Boo",
-    role: "Developer", // TODO: rol bevestigen
-    bio: "Zorgt dat alles technisch klopt, van front-end tot integraties.",
+    role: "Tekstschrijver",
+    bio: "Schrijft heldere, overtuigende teksten die je merk laten spreken.",
   },
   {
     slug: "coen-den-boer",
     name: "Coen den Boer",
-    role: "Content & Video", // TODO: rol bevestigen
-    bio: "Maakt beeld en content die merken tot leven brengen.",
+    role: "Animator",
+    bio: "Maakt animaties die merken in beweging brengen.",
   },
   {
     slug: "yorick-van-schijndel",
     name: "Yorick van Schijndel",
-    role: "Marketing & Strategie", // TODO: rol bevestigen
-    bio: "Helpt klanten zichtbaar te worden en te groeien.",
+    role: "Bedrijfsvideo & fotografie",
+    bio: "Maakt bedrijfsvideo's en foto's die je verhaal in beeld vertellen.",
   },
 ];
