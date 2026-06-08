@@ -8,6 +8,7 @@ import { PageHeader } from "@/components/sections/page-header";
 import { ProcessSteps } from "@/components/sections/process-steps";
 import { TeamAvatar } from "@/components/sections/team-avatar";
 import { CtaBanner } from "@/components/sections/cta-banner";
+import { YouTubeLite } from "@/components/sections/youtube-lite";
 
 export const metadata: Metadata = {
   title: "Over EWVO — Strategisch Digitaal Team",
@@ -29,6 +30,16 @@ const values = [
     title: "Zorgeloos",
     text: "Van strategie tot beheer: wij nemen de online frustratie uit handen.",
   },
+];
+
+/** #vragenrondje — videoreeks van weleer (Een Website van Ons, 2020). */
+const vragenrondjeVideos = [
+  { id: "N2HvDkjErQU", title: "#vragenrondje | Wie zijn wij?" },
+  { id: "SkwFT5oOYhQ", title: "Copywriting? | met Ardjan de Boo" },
+  { id: "x52ZLSmiwlc", title: "Filmmaken? | met Romme Kamps" },
+  { id: "-a4jesNgyj4", title: "Websites bouwen? | met Ozcan Akgun" },
+  { id: "fQcCBK2uVf8", title: "Business strategie? | met Anton Frederiks" },
+  { id: "bUsho9j-8Ng", title: "Fotografie? | met Thomas Bakker" },
 ];
 
 export default async function OverOnsPage() {
@@ -133,6 +144,34 @@ export default async function OverOnsPage() {
                   {member.bio}
                 </p>
               </div>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      <Section className="bg-muted/40">
+        <Container>
+          <SectionHeading
+            eyebrow="Uit de oude doos · 2020"
+            title="#vragenrondje — zo speelden we destijds in"
+          />
+          <p className="mt-4 max-w-2xl rounded-2xl border border-border bg-card p-5 text-sm text-muted-foreground">
+            <span className="font-semibold text-foreground">
+              Even met een knipoog:
+            </span>{" "}
+            deze video&apos;s uit 2020 zijn inmiddels flink verouderd (en een
+            paar collega&apos;s zijn gewisseld), maar het is een leuk voorbeeld
+            van hoe we destijds al inspeelden op de vragen van ondernemers. De
+            vorm verandert, de persoonlijke aanpak niet.
+          </p>
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {vragenrondjeVideos.map((v) => (
+              <figure key={v.id}>
+                <YouTubeLite id={v.id} title={v.title} />
+                <figcaption className="mt-3 text-sm font-medium">
+                  {v.title}
+                </figcaption>
+              </figure>
             ))}
           </div>
         </Container>
