@@ -90,10 +90,27 @@ export function getServiceSlugs(): Promise<string[]> {
 
 /* ------------------------------------ Team ------------------------------------ */
 
+/**
+ * Seed is leidend voor `role` en `bio` (de bevestigde functies/omschrijvingen),
+ * zodat Sanity geen verouderde rollen terugzet. Sanity mag wél de naam en een
+ * eventueel portret (image) aanleveren. Zelfde principe als bij de cases.
+ */
+function mergeTeamWithSeed(sanity: TeamMemberItem[]): TeamMemberItem[] {
+  const sanityBySlug = new Map(sanity.map((m) => [m.slug, m]));
+  const merged = seedTeam.map((seed) => {
+    const s = sanityBySlug.get(seed.slug);
+    return s
+      ? { ...s, name: s.name || seed.name, role: seed.role, bio: seed.bio }
+      : seed;
+  });
+  const seedSlugs = new Set(seedTeam.map((m) => m.slug));
+  return [...merged, ...sanity.filter((m) => !seedSlugs.has(m.slug))];
+}
+
 export function getTeam(): Promise<TeamMemberItem[]> {
   return safeFetch(async () => {
     const data = await cfetch<TeamMemberItem[]>(q.teamQuery);
-    return data?.length ? data : seedTeam;
+    return data?.length ? mergeTeamWithSeed(data) : seedTeam;
   }, seedTeam);
 }
 
