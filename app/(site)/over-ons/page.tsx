@@ -45,14 +45,14 @@ const vragenrondjeVideos = [
 /** Oprichtingsverhaal / tijdlijn. */
 const history = [
   {
-    year: "2013",
-    title: "Het begon met een tip van een slimme huisgenoot",
-    text: "Goede vriend én huisgenoot Joachim den Hertog — iemand die eigenlijk professor had moeten worden — zocht voor Anton uit welke VPS hij nodig had. Anton liet er geen gras over groeien: nog geen dag later schafte hij op z'n 22e zijn eerste lease-server aan. Op vrijdag 31 mei 2013 werd eenwebsitevanons.nl geregistreerd — de officiële oprichting.",
+    year: "± 2011",
+    title: "Het informele begin",
+    text: "Goede vriend én huisgenoot Joachim den Hertog — iemand die eigenlijk professor had moeten worden — zocht voor Anton uit welke VPS hij nodig had. Anton liet er geen gras over groeien: nog geen dag later schafte hij op z'n 22e zijn eerste lease-server aan. En zo'n server schaf je niet voor jezelf aan — die aanschaf was eigenlijk het informele beginpunt van wat later EWVO zou worden.",
   },
   {
-    year: "Vanaf 2013",
-    title: "Samen websites bouwen",
-    text: "Met Edwin van Veluwen bouwde Anton de eerste WordPress-websites: toegankelijk, persoonlijk en met aandacht. Zo werden honderden ondernemers zorgeloos online zichtbaar.",
+    year: "31 mei 2013",
+    title: "De officiële oprichting",
+    text: "Op vrijdag 31 mei 2013 werd eenwebsitevanons.nl geregistreerd: de officiële start. Samen met Edwin van Veluwen bouwde Anton de eerste WordPress-websites — toegankelijk, persoonlijk en met aandacht. Zo werden honderden ondernemers zorgeloos online zichtbaar.",
   },
   {
     year: "2023",
@@ -150,9 +150,9 @@ export default async function OverOnsPage() {
               <p className="mt-2 text-sm text-muted-foreground">
                 Een VPS (Virtual Private Server) is je eigen, afgeschermde deel
                 van een krachtige server: de snelheid en controle van een eigen
-                machine, zonder de kosten daarvan. Precies de betrouwbare basis
-                waarop je websites draait — en waar het voor Anton in 2013
-                allemaal mee begon.
+                machine, zonder de kosten daarvan. En zo&apos;n server schaf je
+                niet voor jezelf aan — vandaar dat die eerste aankoop eigenlijk
+                de informele startdatum is.
               </p>
             </aside>
           </div>
