@@ -42,6 +42,30 @@ const vragenrondjeVideos = [
   { id: "bUsho9j-8Ng", title: "Fotografie? | met Thomas Bakker" },
 ];
 
+/** Oprichtingsverhaal / tijdlijn. */
+const history = [
+  {
+    year: "2013",
+    title: "Het begon met een tip van een slimme huisgenoot",
+    text: "Goede vriend én huisgenoot Joachim den Hertog — iemand die eigenlijk professor had moeten worden — zocht voor Anton uit welke VPS hij nodig had. Anton liet er geen gras over groeien: nog geen dag later schafte hij op z'n 22e zijn eerste lease-server aan. Op vrijdag 31 mei 2013 werd eenwebsitevanons.nl geregistreerd — de officiële oprichting.",
+  },
+  {
+    year: "Vanaf 2013",
+    title: "Samen websites bouwen",
+    text: "Met Edwin van Veluwen bouwde Anton de eerste WordPress-websites: toegankelijk, persoonlijk en met aandacht. Zo werden honderden ondernemers zorgeloos online zichtbaar.",
+  },
+  {
+    year: "2023",
+    title: "Het beste van het beste voor onze klanten",
+    text: "We stapten over naar hostingpartner Yourhosting. Na meerdere gesprekken op kantoor regelden we de allerbeste hosting voor onze klanten.",
+  },
+  {
+    year: "2026",
+    title: "Verder als EWVO",
+    text: "Zelfde team, zelfde persoonlijke aanpak, een nog completer aanbod — voortaan onder één naam: EWVO.",
+  },
+];
+
 export default async function OverOnsPage() {
   const team = await getTeam();
 
@@ -66,10 +90,9 @@ export default async function OverOnsPage() {
         <Container className="grid gap-12 lg:grid-cols-2">
           <div>
             <SectionHeading eyebrow="Ons verhaal" title="Samen verder onder EWVO" />
-            {/* TODO (GATE-A): oprichtingsjaar toevoegen zodra bevestigd (2014 vs 2018) */}
             <div className="mt-6 space-y-4 text-muted-foreground">
               <p>
-                Wat begon als {siteConfig.formerName} — een toegankelijk
+                Wat in 2013 begon als {siteConfig.formerName} — een toegankelijk
                 webbureau dat honderden ondernemers zorgeloos zichtbaar maakte —
                 groeide uit tot een volwaardig digital agency. Vanaf 2026 gaan
                 we verder onder één naam: EWVO.
@@ -99,6 +122,39 @@ export default async function OverOnsPage() {
                 </p>
               </div>
             ))}
+          </div>
+        </Container>
+      </Section>
+
+      <Section>
+        <Container>
+          <SectionHeading
+            eyebrow="Onze geschiedenis"
+            title="Hoe het allemaal begon"
+          />
+          <div className="mt-12 grid gap-12 lg:grid-cols-[1.5fr_1fr]">
+            <ol className="relative space-y-10 before:absolute before:top-2 before:bottom-2 before:left-0 before:w-px before:bg-border">
+              {history.map((item) => (
+                <li key={item.year} className="relative pl-8">
+                  <span className="absolute left-0 top-1.5 h-3 w-3 -translate-x-1/2 rounded-full bg-brand ring-4 ring-background" />
+                  <p className="text-sm font-semibold text-brand">{item.year}</p>
+                  <h3 className="mt-1 font-semibold">{item.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    {item.text}
+                  </p>
+                </li>
+              ))}
+            </ol>
+            <aside className="h-fit rounded-2xl border border-border bg-muted/40 p-6">
+              <h3 className="font-semibold">Wat is een VPS?</h3>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Een VPS (Virtual Private Server) is je eigen, afgeschermde deel
+                van een krachtige server: de snelheid en controle van een eigen
+                machine, zonder de kosten daarvan. Precies de betrouwbare basis
+                waarop je websites draait — en waar het voor Anton in 2013
+                allemaal mee begon.
+              </p>
+            </aside>
           </div>
         </Container>
       </Section>
