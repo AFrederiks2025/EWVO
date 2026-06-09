@@ -86,7 +86,7 @@ export default async function CaseDetailPage({ params }: Params) {
 
       <Section>
         <Container>
-          {study.featured ? (
+          {study.problem || study.approach || study.result ? (
             <div className="grid gap-6 lg:grid-cols-3">
               {study.problem ? (
                 <DetailBlock title="De uitdaging" text={study.problem} />
