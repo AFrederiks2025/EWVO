@@ -110,6 +110,16 @@ export const cases: CaseStudy[] = [
   },
   // Backlog-cases (overzichtskaart bij launch, detailpagina volgt — §6B)
   {
+    slug: "tim-ging-op-reis",
+    client: "Tim ging op Reis",
+    sector: "Auteur & boek",
+    summary:
+      "Een warme, speelse website rond het voorleesboek van Jeroen Struik — met het verhaal, het kleurboek en inspiratie voor (groot)ouders en kinderen.",
+    featured: false,
+    url: "https://www.timgingopreis.nl",
+    // TODO: website-screenshot aanleveren (public/cases/tim-ging-op-reis.jpg).
+  },
+  {
     slug: "kerk-vol-kracht",
     client: "Kerk Vol Kracht",
     sector: "Non-profit",
