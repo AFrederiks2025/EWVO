@@ -114,10 +114,17 @@ export const cases: CaseStudy[] = [
     client: "Tim ging op Reis",
     sector: "Auteur & boek",
     summary:
-      "Een warme, speelse website rond het voorleesboek van Jeroen Struik — met het verhaal, het kleurboek en inspiratie voor (groot)ouders en kinderen.",
+      "Niet de bouw van de website, maar de strategie erachter: EWVO helpt Jeroen Struik scherp krijgen wat hij online wil bereiken met zijn voorleesboek — en wat daarvoor nodig is.",
     featured: false,
+    image: "/cases/tim-ging-op-reis.jpg",
     url: "https://www.timgingopreis.nl",
-    // TODO: website-screenshot aanleveren (public/cases/tim-ging-op-reis.jpg).
+    problem:
+      "Jeroen Struik heeft met ‘Tim ging op reis’ een prachtig voorleesboek (én bijbehorend kleurboek). De vraag was niet technisch — de website stond er al — maar strategisch: welke doelen wil hij online bereiken, en wat is daarvoor allemaal nodig?",
+    approach:
+      "EWVO stapte in als strategisch sparringpartner, niet als websitebouwer. We brachten de doelstellingen scherp in beeld en vertaalden die naar een concreet online plan: positionering, de juiste kanalen en vindbaarheid om (groot)ouders en kinderen te bereiken.",
+    // TODO: concrete mijlpalen/resultaten en een klantquote aanvullen zodra bekend.
+    result:
+      "Een helder doel en een online strategie waar Jeroen op kan sturen, met EWVO als meedenkende partner op de achtergrond — de basis om het boek breder onder de aandacht te brengen.",
   },
   {
     slug: "kerk-vol-kracht",
