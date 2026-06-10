@@ -25,14 +25,11 @@ export function proxy(request: NextRequest) {
   const host = (request.headers.get("host") ?? "").toLowerCase();
   const { pathname, search } = request.nextUrl;
 
-  // Subdomein voorbeeld.ewvo.nl serveert de voorbeeld-landingspagina (/voorbeeld).
+  // Subdomein voorbeeld.ewvo.nl → de /voorbeeld-routes (index + /samenstellen).
   if (host === "voorbeeld.ewvo.nl") {
-    if (pathname === "/") {
-      const url = request.nextUrl.clone();
-      url.pathname = "/voorbeeld";
-      return NextResponse.rewrite(url);
-    }
-    return NextResponse.next();
+    const url = request.nextUrl.clone();
+    url.pathname = pathname === "/" ? "/voorbeeld" : `/voorbeeld${pathname}`;
+    return NextResponse.rewrite(url);
   }
 
   // Onderdeel-subdomeinen (header.ewvo.nl, hero.ewvo.nl, …) → /voorbeeld/<slug>.

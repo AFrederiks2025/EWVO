@@ -77,6 +77,33 @@ export default function VoorbeeldLandingsPage() {
         </Container>
       </section>
 
+      {/* Start met samenstellen */}
+      <Section className="border-b border-border">
+        <Container>
+          <div className="flex flex-col items-start gap-6 rounded-3xl border border-brand/30 bg-brand-muted/50 p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10">
+            <div>
+              <span className="inline-flex items-center gap-2 rounded-full bg-brand px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">
+                Nieuw
+              </span>
+              <h2 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
+                Stel je eigen website samen
+              </h2>
+              <p className="mt-2 max-w-md text-muted-foreground">
+                Kies per onderdeel een variant en zie in een live preview meteen
+                hoe je pagina eruitziet.
+              </p>
+            </div>
+            <a
+              href="https://voorbeeld.ewvo.nl/samenstellen"
+              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
+            >
+              Start met samenstellen
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+        </Container>
+      </Section>
+
       {/* Wat is dit? */}
       <Section>
         <Container className="max-w-3xl">
