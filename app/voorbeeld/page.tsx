@@ -8,7 +8,7 @@ import {
   Target,
 } from "lucide-react";
 import { siteConfig, primaryCta } from "@/lib/site";
-import { Logo } from "@/components/layout/logo";
+import { MegaMenu } from "@/components/voorbeeld/mega-menu";
 import { ButtonLink } from "@/components/ui/button";
 import { Container, Section, SectionHeading } from "@/components/ui/container";
 import { FadeIn } from "@/components/motion/fade-in";
@@ -48,18 +48,8 @@ const voordelen = [
 export default function VoorbeeldLandingsPage() {
   return (
     <>
-      {/* Mini-topbalk — alleen het merk, geen volledige navigatie */}
-      <header className="border-b border-border">
-        <Container className="flex items-center justify-between py-4">
-          <Link href="/" className="flex items-center gap-2 font-semibold">
-            <Logo className="h-8 w-8 rounded-lg" />
-            <span>{siteConfig.name}</span>
-          </Link>
-          <span className="rounded-full border border-brand/30 bg-brand-muted px-3 py-1 text-xs font-semibold uppercase tracking-wide text-brand">
-            Voorbeeldpagina
-          </span>
-        </Container>
-      </header>
+      {/* Mega-menu als header — het navigatie-voorbeeld, meteen zichtbaar */}
+      <MegaMenu />
 
       {/* Hero */}
       <section className="brand-glow border-b border-border">
