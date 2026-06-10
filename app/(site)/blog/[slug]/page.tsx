@@ -6,6 +6,7 @@ import { formatDate } from "@/lib/content/posts";
 import { getPost, getPostSlugs } from "@/lib/cms";
 import { Container, Section } from "@/components/ui/container";
 import { CtaBanner } from "@/components/sections/cta-banner";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -51,6 +52,13 @@ export default async function PostPage({ params }: Params) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", url: "/" },
+          { name: "Blog", url: "/blog" },
+          { name: post.title, url: `/blog/${post.slug}` },
+        ]}
       />
       <section className="brand-glow border-b border-border">
         <Container className="py-16 sm:py-20">

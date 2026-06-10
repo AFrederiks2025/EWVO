@@ -5,6 +5,7 @@ import { ExternalLink } from "lucide-react";
 import { getCase, getCaseSlugs } from "@/lib/cms";
 import { Container, Section } from "@/components/ui/container";
 import { CtaBanner } from "@/components/sections/cta-banner";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -42,6 +43,13 @@ export default async function CaseDetailPage({ params }: Params) {
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", url: "/" },
+          { name: "Portfolio", url: "/portfolio" },
+          { name: study.client, url: `/portfolio/${study.slug}` },
+        ]}
+      />
       <section className="brand-glow border-b border-border">
         <Container className="py-16 sm:py-20">
           <Link

@@ -57,6 +57,10 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
         <OrganizationJsonLd />
+        {/* Vercel Web Analytics + Speed Insights — verzamelen data zodra ze in
+            het Vercel-dashboard zijn ingeschakeld (geen extra dependency). */}
+        <script defer src="/_vercel/insights/script.js" />
+        <script defer src="/_vercel/speed-insights/script.js" />
       </body>
     </html>
   );

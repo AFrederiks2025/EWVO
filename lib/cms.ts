@@ -128,9 +128,10 @@ function mergeCaseWithSeed(seed: CaseStudy, sanity: CaseStudy): CaseStudy {
     sector: sanity.sector || seed.sector,
     summary: sanity.summary || seed.summary,
     url: sanity.url || seed.url,
-    problem: sanity.problem || seed.problem,
-    approach: sanity.approach || seed.approach,
-    result: sanity.result || seed.result,
+    // Seed leidend voor de uitwerking (Sanity bevat nog oude placeholders).
+    problem: seed.problem || sanity.problem,
+    approach: seed.approach || sanity.approach,
+    result: seed.result || sanity.result,
     quote: sanity.quote || seed.quote,
     image: sanity.image || seed.image,
   };
@@ -206,12 +207,16 @@ export function getPost(slug: string): Promise<PostDetail | null> {
     return p ? { ...p, body: textToBlocks(p.body) } : null;
   };
   return safeFetch(async () => {
+    const seed = seedPosts.find((post) => post.slug === slug);
     const data = await cfetch<
       (Omit<Post, "body"> & { body?: PortableTextBlock[] }) | null
     >(q.postQuery, { slug });
-    return data
-      ? mergePostImage({ ...data, body: data.body ?? [] })
-      : seedFallback();
+    if (!data) return seedFallback();
+    return mergePostImage({
+      ...data,
+      // Seed is leidend voor de artikeltekst (Sanity bevat nog oude placeholders).
+      body: seed ? textToBlocks(seed.body) : data.body ?? [],
+    });
   }, seedFallback());
 }
 
