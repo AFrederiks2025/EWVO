@@ -136,6 +136,22 @@ export const cases: CaseStudy[] = [
       "Een helder doel en een online strategie waar Jeroen op kan sturen, met EWVO als meedenkende partner op de achtergrond — de basis om het boek breder onder de aandacht te brengen.",
   },
   {
+    slug: "vink-studiekeuzebegeleiding",
+    client: "VINK Studiekeuzebegeleiding",
+    sector: "Onderwijs",
+    summary:
+      "EWVO bouwde de site niet, maar dacht mee over de strategie: landingspagina's, data verzamelen voor marketing en eerste concepten voor copy en salescampagnes rond events.",
+    featured: false,
+    image: "/cases/vink-studiekeuzebegeleiding.jpg",
+    url: "https://www.vink-studiekeuzebegeleiding.nl",
+    problem:
+      "VINK begeleidt jongeren bij hun studiekeuze en wilde online sterker staan — niet alleen met een mooie website, maar met een aanpak die leads oplevert en events vult. De vraag was vooral strategisch: hoe zet je landingspagina's, data en campagnes slim in?",
+    approach:
+      "EWVO bouwde de website niet, maar deelde z'n ervaring waar het telt: hoe je landingspagina's opzet die converteren, hoe je data verzamelt om je marketing op te sturen, plus de eerste concepten voor de copy en de salescampagnes rond events.",
+    result:
+      "VINK kreeg een concrete basis om zelf mee verder te bouwen: heldere uitgangspunten voor landingspagina's, datagedreven marketing en campagneconcepten voor events — de strategie en eerste opzet van EWVO, de uitvoering in eigen hand.",
+  },
+  {
     slug: "kerk-vol-kracht",
     client: "Kerk Vol Kracht",
     sector: "Non-profit",
