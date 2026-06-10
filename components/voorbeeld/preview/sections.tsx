@@ -1,18 +1,28 @@
+"use client";
+
 import type { ReactNode } from "react";
 import { ArrowRight, Mail, Menu, Play, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useMerk } from "@/components/voorbeeld/preview/brand-context";
 
 /* --------------------------- Mini bouwstenen --------------------------- */
-const Merk = ({ light = false }: { light?: boolean }) => (
-  <div className="flex items-center gap-2">
-    <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-brand text-[11px] font-bold text-white">
-      M
+const Merk = ({ light = false }: { light?: boolean }) => {
+  const merk = useMerk();
+  if (merk.logo) {
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img src={merk.logo} alt="" className="h-7 max-w-[130px] object-contain" />;
+  }
+  return (
+    <div className="flex items-center gap-2">
+      <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-brand text-[11px] font-bold text-white">
+        {(merk.naam || "M").charAt(0).toUpperCase()}
+      </div>
+      <span className={cn("font-bold tracking-tight", light && "text-white")}>
+        {merk.naam || "Merk"}
+      </span>
     </div>
-    <span className={cn("font-bold tracking-tight", light && "text-white")}>
-      Merk
-    </span>
-  </div>
-);
+  );
+};
 
 const NavItems = ({ light = false }: { light?: boolean }) => (
   <div
@@ -89,18 +99,27 @@ const Avatars = () => (
   </div>
 );
 
-const ImgBlock = ({ className }: { className?: string }) => (
-  <div
-    className={cn(
-      "relative overflow-hidden rounded-xl bg-gradient-to-br from-accent/45 via-accent/20 to-brand/25",
-      className,
-    )}
-  >
-    <span className="absolute left-1/2 top-1/2 flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/85 text-brand shadow">
-      <Play className="h-4 w-4 translate-x-px fill-current" />
-    </span>
-  </div>
-);
+const ImgBlock = ({ className }: { className?: string }) => {
+  const merk = useMerk();
+  const img = merk.afbeeldingen[0];
+  return (
+    <div
+      className={cn(
+        "relative overflow-hidden rounded-xl bg-gradient-to-br from-accent/45 via-accent/20 to-brand/25",
+        className,
+      )}
+    >
+      {img ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={img} alt="" className="absolute inset-0 h-full w-full object-cover" />
+      ) : (
+        <span className="absolute left-1/2 top-1/2 flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/85 text-brand shadow">
+          <Play className="h-4 w-4 translate-x-px fill-current" />
+        </span>
+      )}
+    </div>
+  );
+};
 
 const StatCard = ({ value, label }: { value: string; label: string }) => (
   <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
@@ -423,6 +442,8 @@ function Cta({ variant }: { variant: number }) {
 
 /* ---------------------------------- Footer --------------------------------- */
 function Footer({ variant }: { variant: number }) {
+  const merk = useMerk();
+  const rechten = `© 2026 ${merk.naam || "Merk"}${merk.kvk ? ` · KvK ${merk.kvk}` : ""}`;
   const Socials = ({ light = false }: { light?: boolean }) => (
     <div className="flex gap-2">
       {Array.from({ length: 3 }).map((_, i) => (
@@ -466,7 +487,7 @@ function Footer({ variant }: { variant: number }) {
           <Merk />
           <NavItems />
           <Socials />
-          <span className="text-[11px] text-muted-foreground">© 2026 Merk — Alle rechten voorbehouden</span>
+          <span className="text-[11px] text-muted-foreground">{rechten}</span>
         </div>
       );
     case 2:
