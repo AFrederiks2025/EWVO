@@ -1,6 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { voorbeeldSlugs } from "@/lib/voorbeelden";
 
 const CANONICAL_HOST = "www.ewvo.nl";
+const VOORBEELD_SUBS = new Set(voorbeeldSlugs);
 
 /**
  * Padmapping voor de oude eenwebsitevanons.nl-URL's (MERGE-PLAN.md §7A).
@@ -31,6 +33,19 @@ export function proxy(request: NextRequest) {
       return NextResponse.rewrite(url);
     }
     return NextResponse.next();
+  }
+
+  // Onderdeel-subdomeinen (header.ewvo.nl, hero.ewvo.nl, …) → /voorbeeld/<slug>.
+  if (host.endsWith(".ewvo.nl")) {
+    const sub = host.slice(0, host.length - ".ewvo.nl".length);
+    if (VOORBEELD_SUBS.has(sub)) {
+      if (pathname === "/") {
+        const url = request.nextUrl.clone();
+        url.pathname = `/voorbeeld/${sub}`;
+        return NextResponse.rewrite(url);
+      }
+      return NextResponse.next();
+    }
   }
 
   // 1. Oude domein eenwebsitevanons.nl → canoniek EWVO-domein (per pad, 301).

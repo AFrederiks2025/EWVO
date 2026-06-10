@@ -12,6 +12,7 @@ import { Logo } from "@/components/layout/logo";
 import { ButtonLink } from "@/components/ui/button";
 import { Container, Section, SectionHeading } from "@/components/ui/container";
 import { FadeIn } from "@/components/motion/fade-in";
+import { voorbeelden } from "@/lib/voorbeelden";
 
 export const metadata: Metadata = {
   title: "Voorbeeld-landingspagina",
@@ -134,6 +135,41 @@ export default function VoorbeeldLandingsPage() {
                 <h3 className="mt-4 font-semibold">{v.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{v.text}</p>
               </div>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      {/* Voorbeelden per onderdeel */}
+      <Section className="bg-muted/40">
+        <Container>
+          <FadeIn>
+            <SectionHeading
+              eyebrow="Onderdelen"
+              title="Bekijk de voorbeelden per onderdeel"
+              description="Elk onderdeel staat op z'n eigen pagina. Klik door en zie hoe het eruit kan zien."
+            />
+          </FadeIn>
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {voorbeelden.map((v) => (
+              <a
+                key={v.slug}
+                href={`https://${v.slug}.ewvo.nl`}
+                className="group flex items-center justify-between gap-4 rounded-2xl border border-border bg-card p-5 transition-colors hover:border-brand/50"
+              >
+                <span>
+                  <span className="font-semibold transition-colors group-hover:text-brand">
+                    {v.title}
+                  </span>
+                  <span className="mt-1 block text-sm text-muted-foreground">
+                    {v.description}
+                  </span>
+                  <span className="mt-1 block text-xs text-muted-foreground/70">
+                    {v.slug}.ewvo.nl
+                  </span>
+                </span>
+                <ArrowRight className="h-5 w-5 shrink-0 text-muted-foreground transition-all group-hover:translate-x-0.5 group-hover:text-brand" />
+              </a>
             ))}
           </div>
         </Container>
