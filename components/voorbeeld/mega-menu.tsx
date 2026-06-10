@@ -74,7 +74,7 @@ export function MegaMenu() {
 
             {open && (
               <div className="absolute left-0 top-full z-50 pt-3 max-sm:fixed max-sm:inset-0 max-sm:z-[60] max-sm:pt-0">
-                <div className="relative w-[680px] max-w-[calc(100vw-2rem)] rounded-2xl border border-border bg-card p-6 shadow-xl max-sm:flex max-sm:h-full max-sm:w-full max-sm:max-w-none max-sm:flex-col max-sm:overflow-y-auto max-sm:rounded-none">
+                <div className="relative w-[680px] max-w-[calc(100vw-2rem)] rounded-2xl border border-border bg-card p-6 shadow-xl lg:w-[920px] max-sm:flex max-sm:h-full max-sm:w-full max-sm:max-w-none max-sm:flex-col max-sm:overflow-y-auto max-sm:rounded-none">
                   {/* Sluitknop (mobiel) */}
                   <button
                     type="button"
@@ -94,7 +94,7 @@ export function MegaMenu() {
                     </p>
                   </div>
 
-                  <div className="grid grid-cols-1 gap-x-10 gap-y-6 py-5 sm:grid-cols-2">
+                  <div className="grid grid-cols-1 gap-x-8 gap-y-6 py-5 sm:grid-cols-2 lg:grid-cols-4">
                     {groups.map((group) => (
                       <div key={group.label}>
                         <div className="flex items-center gap-2">
