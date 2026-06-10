@@ -9,6 +9,7 @@ import {
   Monitor,
   Palette,
   TrendingUp,
+  X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/layout/logo";
@@ -69,7 +70,7 @@ export function MegaMenu() {
 
   return (
     <div className="border-b border-border bg-card">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-4 sm:px-6">
         {/* Logo */}
         <a href="https://voorbeeld.ewvo.nl" className="flex items-center gap-2 font-semibold">
           <Logo className="h-8 w-8 rounded-lg" />
@@ -77,7 +78,7 @@ export function MegaMenu() {
         </a>
 
         {/* Navigatie */}
-        <nav className="flex items-center gap-1 sm:gap-6 text-sm font-medium">
+        <nav className="flex items-center gap-1 text-sm font-medium sm:gap-6">
           <div
             className="relative"
             onMouseEnter={() => setOpen(true)}
@@ -99,9 +100,19 @@ export function MegaMenu() {
             </button>
 
             {open && (
-              <div className="absolute left-0 top-full z-50 pt-3">
-                <div className="w-[680px] max-w-[calc(100vw-2rem)] rounded-2xl border border-white/10 bg-[#0b0f12] p-6 shadow-2xl">
-                  <div className="border-b border-white/10 pb-4">
+              <div className="absolute left-0 top-full z-50 pt-3 max-sm:fixed max-sm:inset-0 max-sm:z-[60] max-sm:pt-0">
+                <div className="relative w-[680px] max-w-[calc(100vw-2rem)] rounded-2xl border border-white/10 bg-[#0b0f12] p-6 shadow-2xl max-sm:flex max-sm:h-full max-sm:w-full max-sm:max-w-none max-sm:flex-col max-sm:overflow-y-auto max-sm:rounded-none">
+                  {/* Sluitknop (mobiel) */}
+                  <button
+                    type="button"
+                    onClick={() => setOpen(false)}
+                    aria-label="Menu sluiten"
+                    className="absolute right-4 top-4 text-white/60 transition-colors hover:text-white sm:hidden"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+
+                  <div className="border-b border-white/10 pb-4 pr-8 sm:pr-0">
                     <h3 className="text-base font-semibold text-white">
                       Wat kunnen we voor je doen?
                     </h3>
@@ -149,7 +160,7 @@ export function MegaMenu() {
 
                   <a
                     href="#"
-                    className="flex items-center gap-1.5 border-t border-white/10 pt-4 text-sm font-medium text-white/80 transition-colors hover:text-white"
+                    className="flex items-center gap-1.5 border-t border-white/10 pt-4 text-sm font-medium text-white/80 transition-colors hover:text-white max-sm:mt-auto"
                   >
                     Bekijk alle diensten
                     <ArrowRight className="h-4 w-4" />
@@ -173,7 +184,7 @@ export function MegaMenu() {
         {/* CTA */}
         <a
           href="#"
-          className="rounded-full bg-brand px-4 py-2 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90"
+          className="shrink-0 rounded-full bg-brand px-3 py-2 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90 sm:px-4"
         >
           Plan een gesprek
         </a>
