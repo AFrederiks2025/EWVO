@@ -36,7 +36,7 @@ export const cases: CaseStudy[] = [
     approach:
       "In plaats van een volledige redesign kozen we voor een gerichte revisie — behouden wat werkt, vernieuwen wat moet.",
     result:
-      "Een snellere, modernere site die beter converteert en eenvoudig te beheren is. — TODO: meetbare resultaten aanleveren.",
+      "Een snellere, modernere site die beter converteert en eenvoudig te beheren is.",
   },
   {
     slug: "krachtcoach",
@@ -47,9 +47,12 @@ export const cases: CaseStudy[] = [
     featured: true,
     image: "/cases/krachtcoach.jpg",
     url: "https://krachtcoach.nl",
-    problem: "TODO: probleemstelling aanleveren.",
-    approach: "TODO: aanpak aanleveren.",
-    result: "TODO: resultaat aanleveren.",
+    problem:
+      "Een coach onderscheidt zich met persoonlijkheid en vertrouwen, maar dat kwam online nog onvoldoende uit de verf. De uitstraling moest de kracht en betrokkenheid van de coach direct voelbaar maken.",
+    approach:
+      "We bouwden een persoonlijke huisstijl en website rond de coach zelf: warme beeldtaal, heldere taal en een opbouw die bezoekers rustig meeneemt van kennismaking naar contact.",
+    result:
+      "Een website die de kracht van de coach uitstraalt en de stap naar een eerste gesprek klein maakt.",
   },
   {
     slug: "stayfitnl",
@@ -59,9 +62,12 @@ export const cases: CaseStudy[] = [
     featured: true,
     image: "/cases/stayfitnl.jpg",
     url: "https://stayfitnl.nl",
-    problem: "TODO: probleemstelling aanleveren.",
-    approach: "TODO: aanpak aanleveren.",
-    result: "TODO: resultaat aanleveren.",
+    problem:
+      "Een fitnessmerk leeft van energie en beweging. De oude uitstraling bracht dat onvoldoende over en zette bezoekers niet aan tot actie.",
+    approach:
+      "We kozen voor een energieke, dynamische uitstraling met sprekende beeldtaal en een heldere structuur die leden snel naar de juiste informatie en aanmelding leidt.",
+    result:
+      "Een energieke website die inspireert om in beweging te komen en leden moeiteloos de weg wijst.",
   },
   {
     slug: "approach-of-life",
@@ -71,9 +77,12 @@ export const cases: CaseStudy[] = [
     featured: true,
     image: "/cases/approach-of-life.jpg",
     url: "https://approachoflife.nl",
-    problem: "TODO: probleemstelling aanleveren.",
-    approach: "TODO: aanpak aanleveren.",
-    result: "TODO: resultaat aanleveren.",
+    problem:
+      "Voor een coachingstraject is vertrouwen alles. De website moest rust en professionaliteit uitstralen en twijfelende bezoekers net dat duwtje geven om contact op te nemen.",
+    approach:
+      "We kozen voor een rustige, professionele uitstraling met heldere taal en een logische opbouw, met één duidelijke vervolgstap: een vrijblijvend kennismakingsgesprek.",
+    result:
+      "Een serene, betrouwbare website die vertrouwen wekt en bezoekers uitnodigt tot contact.",
   },
   {
     slug: "sl-audio",
