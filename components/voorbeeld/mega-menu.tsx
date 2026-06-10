@@ -5,65 +5,37 @@ import {
   ArrowRight,
   ChevronDown,
   ChevronRight,
-  Cpu,
-  Monitor,
-  Palette,
-  TrendingUp,
+  Component,
+  FileText,
+  LayoutPanelTop,
+  Sparkles,
   X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/layout/logo";
+import { voorbeelden, voorbeeldGroepen } from "@/lib/voorbeelden";
 
-type Item = { name: string; badge?: string };
-type Group = {
-  icon: typeof Monitor;
-  label: string;
-  sub: string;
-  items: Item[];
+const groepIcoon: Record<string, typeof LayoutPanelTop> = {
+  Structuur: LayoutPanelTop,
+  "Boven de vouw": Sparkles,
+  "Pagina's & content": FileText,
+  Componenten: Component,
+};
+const groepSub: Record<string, string> = {
+  Structuur: "Opbouw & navigatie.",
+  "Boven de vouw": "De eerste indruk.",
+  "Pagina's & content": "Volledige secties.",
+  Componenten: "Losse UI-elementen.",
 };
 
-const groups: Group[] = [
-  {
-    icon: Monitor,
-    label: "Websites & webshops",
-    sub: "Online sterk staan.",
-    items: [
-      { name: "Webdesign" },
-      { name: "Webshops", badge: "Populair" },
-      { name: "Landingspagina's" },
-    ],
-  },
-  {
-    icon: TrendingUp,
-    label: "Strategie & groei",
-    sub: "Naar een hoger niveau.",
-    items: [
-      { name: "Digitale strategie" },
-      { name: "SEO & vindbaarheid" },
-      { name: "Marketing & data" },
-    ],
-  },
-  {
-    icon: Palette,
-    label: "Merk & content",
-    sub: "Een merk dat blijft hangen.",
-    items: [
-      { name: "Branding & huisstijl" },
-      { name: "Content & copy" },
-      { name: "Video & fotografie" },
-    ],
-  },
-  {
-    icon: Cpu,
-    label: "Techniek & AI",
-    sub: "Zorgeloos online.",
-    items: [
-      { name: "Hosting & onderhoud" },
-      { name: "AI-oplossingen", badge: "Nieuw" },
-      { name: "Support" },
-    ],
-  },
-];
+const groups = voorbeeldGroepen.map((g) => ({
+  icon: groepIcoon[g],
+  label: g,
+  sub: groepSub[g],
+  items: voorbeelden
+    .filter((v) => v.group === g)
+    .map((v) => ({ name: v.title, href: `https://${v.slug}.ewvo.nl` })),
+}));
 
 export function MegaMenu() {
   const [open, setOpen] = useState(false);
@@ -90,7 +62,7 @@ export function MegaMenu() {
               aria-expanded={open}
               className="flex items-center gap-1 rounded-md px-2 py-1.5 text-foreground transition-colors hover:text-brand"
             >
-              Wat we doen
+              Onderdelen
               <ChevronDown
                 className={cn(
                   "h-4 w-4 transition-transform duration-200",
@@ -114,10 +86,10 @@ export function MegaMenu() {
 
                   <div className="border-b border-white/10 pb-4 pr-8 sm:pr-0">
                     <h3 className="text-base font-semibold text-white">
-                      Wat kunnen we voor je doen?
+                      Bekijk onze voorbeelden
                     </h3>
                     <p className="mt-1 text-sm text-white/50">
-                      Kies een dienst en ontdek wat bij jou past.
+                      Klik door naar een voorbeeld van elk onderdeel.
                     </p>
                   </div>
 
@@ -135,7 +107,7 @@ export function MegaMenu() {
                           {group.items.map((item) => (
                             <li key={item.name}>
                               <a
-                                href="#"
+                                href={item.href}
                                 className="group/item -mx-2 flex items-center justify-between rounded-lg px-2 py-1.5 transition-colors hover:bg-white/5"
                               >
                                 <span className="flex items-center gap-2.5">
@@ -143,11 +115,6 @@ export function MegaMenu() {
                                   <span className="text-sm text-white/90">
                                     {item.name}
                                   </span>
-                                  {item.badge && (
-                                    <span className="rounded-full bg-brand px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
-                                      {item.badge}
-                                    </span>
-                                  )}
                                 </span>
                                 <ChevronRight className="h-4 w-4 text-white/25 transition-colors group-hover/item:text-white/60" />
                               </a>
@@ -159,10 +126,10 @@ export function MegaMenu() {
                   </div>
 
                   <a
-                    href="#"
+                    href="https://voorbeeld.ewvo.nl"
                     className="flex items-center gap-1.5 border-t border-white/10 pt-4 text-sm font-medium text-white/80 transition-colors hover:text-white max-sm:mt-auto"
                   >
-                    Bekijk alle diensten
+                    Alle onderdelen op een rij
                     <ArrowRight className="h-4 w-4" />
                   </a>
                 </div>
@@ -170,20 +137,20 @@ export function MegaMenu() {
             )}
           </div>
 
-          <a href="#" className="hidden px-2 py-1.5 text-muted-foreground transition-colors hover:text-foreground md:block">
+          <a href="https://portfolio.ewvo.nl" className="hidden px-2 py-1.5 text-muted-foreground transition-colors hover:text-foreground md:block">
             Portfolio
           </a>
-          <a href="#" className="hidden px-2 py-1.5 text-muted-foreground transition-colors hover:text-foreground md:block">
+          <a href="https://blog.ewvo.nl" className="hidden px-2 py-1.5 text-muted-foreground transition-colors hover:text-foreground md:block">
             Blog
           </a>
-          <a href="#" className="hidden px-2 py-1.5 text-muted-foreground transition-colors hover:text-foreground md:block">
-            Over ons
+          <a href="https://team.ewvo.nl" className="hidden px-2 py-1.5 text-muted-foreground transition-colors hover:text-foreground md:block">
+            Team
           </a>
         </nav>
 
         {/* CTA */}
         <a
-          href="#"
+          href="https://contact.ewvo.nl"
           className="shrink-0 rounded-full bg-brand px-3 py-2 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90 sm:px-4"
         >
           Plan een gesprek

@@ -10,6 +10,8 @@ import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/layout/logo";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
+import { ServicesMega } from "@/components/layout/services-mega";
+import { services } from "@/lib/content/services";
 
 export function Header() {
   const pathname = usePathname();
@@ -65,7 +67,24 @@ export function Header() {
 
           <nav className="hidden items-center gap-1 md:flex">
             {mainNav.map((item) =>
-              item.children ? (
+              item.label === "Diensten" ? (
+                <div key={item.href} className="group relative">
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      navPill,
+                      "inline-flex items-center gap-1",
+                      isActive(item.href) && "text-foreground",
+                    )}
+                  >
+                    {item.label}
+                    <ChevronDown className="h-4 w-4" aria-hidden />
+                  </Link>
+                  <div className="invisible absolute left-0 top-full z-50 pt-2 opacity-0 transition-opacity group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                    <ServicesMega />
+                  </div>
+                </div>
+              ) : item.children ? (
                 <div key={item.href} className="group relative">
                   <Link
                     href={item.href}
@@ -143,6 +162,20 @@ export function Header() {
                   >
                     {item.label}
                   </Link>
+                  {item.label === "Diensten" && (
+                    <div className="ml-3 mt-1 flex flex-col gap-1 border-l border-border pl-3">
+                      {services.map((s) => (
+                        <Link
+                          key={s.slug}
+                          href={`/diensten/${s.slug}`}
+                          onClick={() => setOpen(false)}
+                          className="block rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground"
+                        >
+                          {s.title}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                   {item.children && (
                     <div className="ml-3 mt-1 flex flex-col gap-1 border-l border-border pl-3">
                       {item.children
