@@ -10,7 +10,10 @@ import { Container } from "@/components/ui/container";
 type Params = { params: Promise<{ component: string }> };
 
 export function generateStaticParams() {
-  return voorbeelden.map((v) => ({ component: v.slug }));
+  // 'navigatie' heeft een eigen statische route (het mega-menu-voorbeeld).
+  return voorbeelden
+    .filter((v) => v.slug !== "navigatie")
+    .map((v) => ({ component: v.slug }));
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
