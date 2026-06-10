@@ -6,6 +6,7 @@ import { voorbeelden, getVoorbeeld } from "@/lib/voorbeelden";
 import { siteConfig } from "@/lib/site";
 import { Logo } from "@/components/layout/logo";
 import { Container } from "@/components/ui/container";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 
 type Params = { params: Promise<{ component: string }> };
 
@@ -43,9 +44,12 @@ export default async function VoorbeeldComponentPage({ params }: Params) {
             <Logo className="h-8 w-8 rounded-lg" />
             <span>{siteConfig.name}</span>
           </a>
-          <span className="rounded-full border border-brand/30 bg-brand-muted px-3 py-1 text-xs font-semibold uppercase tracking-wide text-brand">
-            Voorbeeldpagina
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="rounded-full border border-brand/30 bg-brand-muted px-3 py-1 text-xs font-semibold uppercase tracking-wide text-brand">
+              Voorbeeldpagina
+            </span>
+            <ThemeToggle />
+          </div>
         </Container>
       </header>
 

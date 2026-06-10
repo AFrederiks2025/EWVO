@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/layout/logo";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { voorbeelden, voorbeeldGroepen } from "@/lib/voorbeelden";
 
 const groepIcoon: Record<string, typeof LayoutPanelTop> = {
@@ -73,22 +74,22 @@ export function MegaMenu() {
 
             {open && (
               <div className="absolute left-0 top-full z-50 pt-3 max-sm:fixed max-sm:inset-0 max-sm:z-[60] max-sm:pt-0">
-                <div className="relative w-[680px] max-w-[calc(100vw-2rem)] rounded-2xl border border-white/10 bg-[#0b0f12] p-6 shadow-2xl max-sm:flex max-sm:h-full max-sm:w-full max-sm:max-w-none max-sm:flex-col max-sm:overflow-y-auto max-sm:rounded-none">
+                <div className="relative w-[680px] max-w-[calc(100vw-2rem)] rounded-2xl border border-border bg-card p-6 shadow-xl max-sm:flex max-sm:h-full max-sm:w-full max-sm:max-w-none max-sm:flex-col max-sm:overflow-y-auto max-sm:rounded-none">
                   {/* Sluitknop (mobiel) */}
                   <button
                     type="button"
                     onClick={() => setOpen(false)}
                     aria-label="Menu sluiten"
-                    className="absolute right-4 top-4 text-white/60 transition-colors hover:text-white sm:hidden"
+                    className="absolute right-4 top-4 text-muted-foreground transition-colors hover:text-foreground sm:hidden"
                   >
                     <X className="h-5 w-5" />
                   </button>
 
-                  <div className="border-b border-white/10 pb-4 pr-8 sm:pr-0">
-                    <h3 className="text-base font-semibold text-white">
+                  <div className="border-b border-border pb-4 pr-8 sm:pr-0">
+                    <h3 className="text-base font-semibold text-foreground">
                       Bekijk onze voorbeelden
                     </h3>
-                    <p className="mt-1 text-sm text-white/50">
+                    <p className="mt-1 text-sm text-muted-foreground">
                       Klik door naar een voorbeeld van elk onderdeel.
                     </p>
                   </div>
@@ -102,21 +103,23 @@ export function MegaMenu() {
                             {group.label}
                           </span>
                         </div>
-                        <p className="mt-1 text-xs text-white/50">{group.sub}</p>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          {group.sub}
+                        </p>
                         <ul className="mt-3 space-y-1">
                           {group.items.map((item) => (
                             <li key={item.name}>
                               <a
                                 href={item.href}
-                                className="group/item -mx-2 flex items-center justify-between rounded-lg px-2 py-1.5 transition-colors hover:bg-white/5"
+                                className="group/item -mx-2 flex items-center justify-between rounded-lg px-2 py-1.5 transition-colors hover:bg-muted"
                               >
                                 <span className="flex items-center gap-2.5">
                                   <span className="h-1.5 w-1.5 rounded-full bg-brand" />
-                                  <span className="text-sm text-white/90">
+                                  <span className="text-sm text-foreground">
                                     {item.name}
                                   </span>
                                 </span>
-                                <ChevronRight className="h-4 w-4 text-white/25 transition-colors group-hover/item:text-white/60" />
+                                <ChevronRight className="h-4 w-4 text-muted-foreground/40 transition-colors group-hover/item:text-brand" />
                               </a>
                             </li>
                           ))}
@@ -127,7 +130,7 @@ export function MegaMenu() {
 
                   <a
                     href="https://voorbeeld.ewvo.nl"
-                    className="flex items-center gap-1.5 border-t border-white/10 pt-4 text-sm font-medium text-white/80 transition-colors hover:text-white max-sm:mt-auto"
+                    className="flex items-center gap-1.5 border-t border-border pt-4 text-sm font-medium text-foreground/80 transition-colors hover:text-brand max-sm:mt-auto"
                   >
                     Alle onderdelen op een rij
                     <ArrowRight className="h-4 w-4" />
@@ -148,13 +151,16 @@ export function MegaMenu() {
           </a>
         </nav>
 
-        {/* CTA */}
-        <a
-          href="https://contact.ewvo.nl"
-          className="shrink-0 rounded-full bg-brand px-3 py-2 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90 sm:px-4"
-        >
-          Plan een gesprek
-        </a>
+        {/* Thema-knop + CTA */}
+        <div className="flex shrink-0 items-center gap-2">
+          <ThemeToggle />
+          <a
+            href="https://contact.ewvo.nl"
+            className="rounded-full bg-brand px-3 py-2 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90 sm:px-4"
+          >
+            Plan een gesprek
+          </a>
+        </div>
       </div>
     </div>
   );
