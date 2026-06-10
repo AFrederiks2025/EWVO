@@ -17,6 +17,7 @@ export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
 
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(`${href}/`);
@@ -27,6 +28,13 @@ export function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Sluit de menu's bij (client-side) navigatie, zodat ze niet open blijven staan.
+  useEffect(() => {
+    setOpen(false);
+    setServicesOpen(false);
+    (document.activeElement as HTMLElement | null)?.blur();
+  }, [pathname]);
 
   const navPill =
     "rounded-full px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground";
@@ -68,7 +76,12 @@ export function Header() {
           <nav className="hidden items-center gap-1 md:flex">
             {mainNav.map((item) =>
               item.label === "Diensten" ? (
-                <div key={item.href} className="group relative">
+                <div
+                  key={item.href}
+                  className="relative"
+                  onMouseEnter={() => setServicesOpen(true)}
+                  onMouseLeave={() => setServicesOpen(false)}
+                >
                   <Link
                     href={item.href}
                     className={cn(
@@ -78,10 +91,23 @@ export function Header() {
                     )}
                   >
                     {item.label}
-                    <ChevronDown className="h-4 w-4" aria-hidden />
+                    <ChevronDown
+                      className={cn(
+                        "h-4 w-4 transition-transform",
+                        servicesOpen && "rotate-180",
+                      )}
+                      aria-hidden
+                    />
                   </Link>
-                  <div className="invisible absolute left-0 top-full z-50 pt-2 opacity-0 transition-opacity group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                    <ServicesMega />
+                  <div
+                    className={cn(
+                      "absolute left-0 top-full z-50 pt-2 transition-opacity",
+                      servicesOpen
+                        ? "visible opacity-100"
+                        : "invisible opacity-0",
+                    )}
+                  >
+                    <ServicesMega onNavigate={() => setServicesOpen(false)} />
                   </div>
                 </div>
               ) : item.children ? (

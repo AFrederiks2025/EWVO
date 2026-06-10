@@ -19,7 +19,7 @@ const icons: Record<string, typeof Compass> = {
 };
 
 /** Licht mega-paneel met de 5 dienstpijlers — voor het hoofdmenu. */
-export function ServicesMega() {
+export function ServicesMega({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <div className="w-[560px] max-w-[calc(100vw-1.5rem)] rounded-2xl border border-border bg-card p-6 shadow-xl">
       <div className="border-b border-border pb-4">
@@ -36,6 +36,7 @@ export function ServicesMega() {
             <div key={s.slug}>
               <Link
                 href={`/diensten/${s.slug}`}
+                onClick={onNavigate}
                 className="flex items-center gap-2 text-brand"
               >
                 <Icon className="h-4 w-4" />
@@ -49,6 +50,7 @@ export function ServicesMega() {
                   <li key={f}>
                     <Link
                       href={`/diensten/${s.slug}`}
+                      onClick={onNavigate}
                       className="group/item -mx-2 flex items-center justify-between rounded-lg px-2 py-1.5 transition-colors hover:bg-muted"
                     >
                       <span className="flex items-center gap-2.5">
@@ -67,6 +69,7 @@ export function ServicesMega() {
 
       <Link
         href="/diensten"
+        onClick={onNavigate}
         className="flex items-center gap-1.5 border-t border-border pt-4 text-sm font-medium text-foreground/80 transition-colors hover:text-brand"
       >
         Bekijk alle diensten
