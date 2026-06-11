@@ -226,7 +226,14 @@ export default async function HomePage() {
                   index={i}
                   className="h-16 w-16 rounded-2xl"
                 />
-                <h3 className="mt-4 font-semibold">{member.name}</h3>
+                <div className="mt-4 flex items-center gap-2">
+                  <h3 className="font-semibold">{member.name}</h3>
+                  {member.senior && (
+                    <span className="rounded-full bg-brand-muted px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-brand">
+                      Senior
+                    </span>
+                  )}
+                </div>
                 <p className="text-sm text-brand">{member.role}</p>
                 <p className="mt-2 text-sm text-muted-foreground">
                   {member.bio}

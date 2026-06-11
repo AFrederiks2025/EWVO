@@ -36,7 +36,14 @@ export default async function TeamPage() {
                   index={i}
                   className="h-20 w-20 rounded-2xl"
                 />
-                <h2 className="mt-5 text-lg font-semibold">{member.name}</h2>
+                <div className="mt-5 flex items-center gap-2">
+                  <h2 className="text-lg font-semibold">{member.name}</h2>
+                  {member.senior && (
+                    <span className="rounded-full bg-brand-muted px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-brand">
+                      Senior
+                    </span>
+                  )}
+                </div>
                 <p className="text-sm font-medium text-brand">{member.role}</p>
                 <p className="mt-2 text-sm text-muted-foreground">
                   {member.bio}

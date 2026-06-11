@@ -9,6 +9,8 @@ export type TeamMember = {
   role: string;
   bio: string;
   image?: string;
+  /** Toont een "Senior"-badge op de teamkaart. */
+  senior?: boolean;
 };
 
 export const team: TeamMember[] = [
@@ -47,5 +49,19 @@ export const team: TeamMember[] = [
     name: "Yorick van Schijndel",
     role: "Bedrijfsvideo & fotografie",
     bio: "Maakt bedrijfsvideo's en foto's die je verhaal in beeld vertellen.",
+  },
+  {
+    slug: "sipko-hoogsteen",
+    name: "Sipko Hoogsteen",
+    role: "Senior consultant", // TODO: rol/specialisme bevestigen
+    bio: "Senior adviseur die met ruime ervaring meedenkt over strategie en groei.",
+    senior: true,
+  },
+  {
+    slug: "karel-jan-voogd",
+    name: "Karel Jan Voogd",
+    role: "Senior consultant", // TODO: rol/specialisme bevestigen
+    bio: "Senior adviseur die projecten met overzicht en ervaring op koers houdt.",
+    senior: true,
   },
 ];
