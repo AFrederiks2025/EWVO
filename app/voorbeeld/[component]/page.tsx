@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Check, Hammer } from "lucide-react";
+import { ArrowLeft, Check } from "lucide-react";
 import { voorbeelden, getVoorbeeld } from "@/lib/voorbeelden";
 import { siteConfig } from "@/lib/site";
 import { Logo } from "@/components/layout/logo";
 import { Container, Section, SectionHeading } from "@/components/ui/container";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { FadeIn } from "@/components/motion/fade-in";
+import { OnderdeelVoorbeelden } from "@/components/voorbeeld/preview/onderdeel-voorbeelden";
 
 type Params = { params: Promise<{ component: string }> };
 
@@ -75,8 +76,23 @@ export default async function VoorbeeldComponentPage({ params }: Params) {
         </Container>
       </section>
 
-      {/* Wat is het + meerwaarde */}
+      {/* Voorbeelden van dit onderdeel */}
       <Section>
+        <Container>
+          <FadeIn>
+            <SectionHeading
+              eyebrow="Voorbeelden"
+              title={`Zo kan een ${v.title.toLowerCase()} eruitzien`}
+            />
+          </FadeIn>
+          <div className="mt-10">
+            <OnderdeelVoorbeelden slug={v.slug} />
+          </div>
+        </Container>
+      </Section>
+
+      {/* Wat is het + meerwaarde */}
+      <Section className="bg-muted/40">
         <Container className="max-w-4xl">
           {v.wat && (
             <FadeIn>
@@ -114,12 +130,6 @@ export default async function VoorbeeldComponentPage({ params }: Params) {
             </div>
           )}
 
-          <div className="mt-14 flex justify-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm text-muted-foreground">
-              <Hammer className="h-4 w-4 text-brand" />
-              Binnenkort vind je hier voorbeelden van {v.title.toLowerCase()}.
-            </span>
-          </div>
         </Container>
       </Section>
     </>
