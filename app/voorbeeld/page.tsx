@@ -13,6 +13,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { Container, Section, SectionHeading } from "@/components/ui/container";
 import { FadeIn } from "@/components/motion/fade-in";
 import { voorbeelden } from "@/lib/voorbeelden";
+import { onderdeelPreviews } from "@/components/voorbeeld/preview/onderdelen";
 
 export const metadata: Metadata = {
   title: "Voorbeeld-landingspagina",
@@ -167,25 +168,32 @@ export default function VoorbeeldLandingsPage() {
               description="Elk onderdeel staat op z'n eigen pagina. Klik door en zie hoe het eruit kan zien."
             />
           </FadeIn>
-          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {voorbeelden.map((v) => (
               <a
                 key={v.slug}
                 href={`https://${v.slug}.ewvo.nl`}
-                className="group flex items-center justify-between gap-4 rounded-2xl border border-border bg-card p-5 transition-colors hover:border-brand/50"
+                className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all hover:border-brand/50 hover:shadow-md"
               >
-                <span>
-                  <span className="font-semibold transition-colors group-hover:text-brand">
+                {/* Mini-weergave van het onderdeel zelf */}
+                <div className="flex h-40 items-center justify-center overflow-hidden border-b border-border bg-muted/30 p-4">
+                  {onderdeelPreviews[v.slug]?.()}
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground/80">
+                    Dit is een
+                  </p>
+                  <h3 className="mt-0.5 font-semibold transition-colors group-hover:text-brand">
                     {v.title}
-                  </span>
-                  <span className="mt-1 block text-sm text-muted-foreground">
+                  </h3>
+                  <p className="mt-1 flex-1 text-sm text-muted-foreground">
                     {v.description}
+                  </p>
+                  <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-brand">
+                    Meer voorbeelden
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                   </span>
-                  <span className="mt-1 block text-xs text-muted-foreground/70">
-                    {v.slug}.ewvo.nl
-                  </span>
-                </span>
-                <ArrowRight className="h-5 w-5 shrink-0 text-muted-foreground transition-all group-hover:translate-x-0.5 group-hover:text-brand" />
+                </div>
               </a>
             ))}
           </div>
