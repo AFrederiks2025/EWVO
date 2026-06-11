@@ -1,3 +1,5 @@
+"use client";
+
 import type { ReactNode } from "react";
 import { secties } from "@/components/voorbeeld/preview/sections";
 import { onderdeelPreviews } from "@/components/voorbeeld/preview/onderdelen";
