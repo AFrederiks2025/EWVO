@@ -21,7 +21,7 @@ const icons: Record<string, typeof Compass> = {
 /** Licht mega-paneel met de 5 dienstpijlers — voor het hoofdmenu. */
 export function ServicesMega({ onNavigate }: { onNavigate?: () => void }) {
   return (
-    <div className="w-[560px] max-w-[calc(100vw-1.5rem)] rounded-2xl border border-border bg-card p-6 shadow-xl">
+    <div className="w-[560px] max-w-[calc(100vw-1.5rem)] rounded-2xl border border-border bg-card p-6 shadow-xl lg:w-[920px]">
       <div className="border-b border-border pb-4">
         <h3 className="text-base font-semibold">Wat we voor je doen</h3>
         <p className="mt-1 text-sm text-muted-foreground">
@@ -29,7 +29,7 @@ export function ServicesMega({ onNavigate }: { onNavigate?: () => void }) {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-x-8 gap-y-6 py-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-x-6 gap-y-6 py-5 sm:grid-cols-2 lg:grid-cols-5">
         {services.map((s) => {
           const Icon = icons[s.icon] ?? Compass;
           return (
